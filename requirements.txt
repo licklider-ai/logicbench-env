@@ -1,0 +1,10 @@
+pandas
+pydantic
+typer
+orjson
+rich
+jsonschema
+matplotlib
+openpyxl
+python-dotenv
+openai

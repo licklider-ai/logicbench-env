@@ -1,0 +1,67 @@
+# scripts/score.py (fallback & robust normalizer)
+import sys, json, re
+import pandas as pd
+
+ASCII_PUNCT = r"[\\.,!?:;'\"()\\[\\]{}]"
+
+def norm_text(s):
+    if s is None:
+        return ""
+    s = str(s).strip().lower()
+    # 日本語の同義パターンも軽く吸収
+    s = s.replace("はい", "yes").replace("いいえ", "no")
+    s = s.replace("true", "yes").replace("false", "no")
+    s = s.replace("y", "yes").replace("n", "no")
+    # 空白と英数字の句読点を除去
+    s = re.sub(r"\s+", "", s)
+    s = re.sub(ASCII_PUNCT, "", s)
+    return s
+
+def is_correct(pred, gold, tol_abs=0.0, tol_rel=0.0):
+    # 数値は許容誤差で比較
+    try:
+        p = float(pred); g = float(gold)
+        return abs(p-g) <= max(tol_abs, tol_rel*abs(g))
+    except Exception:
+        return norm_text(pred) == norm_text(gold)
+
+def main(in_path, gold_path, out_csv):
+    preds = [json.loads(l) for l in open(in_path,"r",encoding="utf-8") if l.strip()]
+    gold  = {}
+    with open(gold_path,"r",encoding="utf-8") as f:
+        for l in f:
+            if not l.strip(): continue
+            o = json.loads(l)
+            gold[o["id"]] = o["answer"]
+
+    rows = []
+    for r in preds:
+        sid = r.get("sample_id")
+        parsed = r.get("parsed")
+        # ★ parsed が無ければ raw_text を JSON として読む
+        if not parsed:
+            try:
+                parsed = json.loads(r.get("raw_text",""))
+            except Exception:
+                parsed = {}
+        pred = (parsed or {}).get("final_answer")
+        g = gold.get(sid)
+        ok = is_correct(pred, g)
+        rows.append({
+            "sample_id": sid,
+            "final_answer": pred,
+            "gold": g,
+            "correct": int(ok),
+            "latency_ms": r.get("latency_ms")
+        })
+
+    df = pd.DataFrame(rows)
+    df.to_csv(out_csv, index=False, encoding="utf-8-sig")
+    acc = df["correct"].mean() if len(df) else 0.0
+    print(f"acc={acc:.3f}, wrote {out_csv}")
+
+if __name__ == "__main__":
+    in_path  = sys.argv[1] if len(sys.argv)>1 else "runs/dev_raw.jsonl"
+    gold_path= sys.argv[2] if len(sys.argv)>2 else "data/gold.jsonl"
+    out_csv  = sys.argv[3] if len(sys.argv)>3 else "runs/dev_scored.csv"
+    main(in_path, gold_path, out_csv)

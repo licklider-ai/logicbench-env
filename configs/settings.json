@@ -1,0 +1,11 @@
+{
+  "model_name": "gpt-4o-mini",
+  "temperature": 0.0,
+  "max_tokens": 300,
+  "json_schema_required": true,
+  "numeric_tolerance": {
+    "abs": 0.0,
+    "rel": 0.0
+  },
+  "retry_times": 1
+}

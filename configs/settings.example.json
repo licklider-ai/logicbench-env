@@ -1,0 +1,21 @@
+{
+  "model_name": "gpt-4o-mini",
+  "temperature": 0.0,
+  "max_tokens": 512,
+  "json_schema_required": true,
+  "fields": [
+    "key_step_summary",
+    "final_answer",
+    "confidence"
+  ],
+  "numeric_tolerance": {
+    "abs": 0.0,
+    "rel": 0.0
+  },
+  "quality_gates": {
+    "acc_min": 0.8,
+    "stability_min": 0.9,
+    "robust_consistency_min": 0.7,
+    "robust_acc_drop_max_pp": 10.0
+  }
+}
