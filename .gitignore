@@ -1,16 +1,8 @@
-
-# Virtual env
-.venv/
-# Python cache
-__pycache__/
-*.pyc
-# Local runs and reports
+# Ignore output folders
 runs/
 reports/
-# Secrets
-.env
-.env.*
-# OS
-.DS_Store
-Thumbs.db
-.env
+
+# But keep these directories tracked
+!runs/
+!reports/
+

@@ -1,0 +1,30 @@
+=== Overall Accuracy ===
+Total: 20  Correct: 0  Acc: 0.00%
+
+=== Accuracy by Category ===
+BQA/first_order_logic/constructive_dilemma    0/  1  (  0.0%)
+BQA/first_order_logic/destructive_dilemma    0/  1  (  0.0%)
+BQA/first_order_logic/disjunctive_syllogism    0/  1  (  0.0%)
+BQA/first_order_logic/existential_generalization    0/  1  (  0.0%)
+BQA/first_order_logic/hypothetical_syllogism    0/  1  (  0.0%)
+BQA/first_order_logic/modus_ponens    0/  1  (  0.0%)
+BQA/first_order_logic/modus_tollens    0/  1  (  0.0%)
+BQA/first_order_logic/universal_instantiation    0/  1  (  0.0%)
+BQA/nm_logic/default_reasoning_default    0/  1  (  0.0%)
+BQA/nm_logic/default_reasoning_irr    0/  1  (  0.0%)
+BQA/nm_logic/default_reasoning_open    0/  1  (  0.0%)
+BQA/nm_logic/default_reasoning_several    0/  1  (  0.0%)
+BQA/nm_logic/reasoning_about_exceptions_1    0/  1  (  0.0%)
+BQA/nm_logic/reasoning_about_exceptions_2    0/  1  (  0.0%)
+BQA/nm_logic/reasoning_about_exceptions_3    0/  1  (  0.0%)
+BQA/propositional_logic/bidirectional_dilemma    0/  1  (  0.0%)
+BQA/propositional_logic/constructive_dilemma    0/  1  (  0.0%)
+BQA/propositional_logic/disjunctive_syllogism    0/  1  (  0.0%)
+BQA/propositional_logic/hypothetical_syllogism    0/  1  (  0.0%)
+BQA/propositional_logic/modus_tollens    0/  1  (  0.0%)
+
+=== Token Usage & Cost ===
+Prompt tokens:    580
+Completion tokens:164
+Price (per 1K):   in=$0.005  out=$0.015
+Estimated cost:   $0.0054
