@@ -59,7 +59,8 @@ def main(in_path, gold_path, out_csv):
     with open(gold_path,"r",encoding="utf-8") as f:
         for l in f:
             if not l.strip(): continue
-            o = json.loads(l); gold[o["id"]] = o["answer"]
+            o = json.loads(l); gold[o["id"]] = o.get("answer", o.get("output"))
+
 
     rows = []
     for r in preds:
