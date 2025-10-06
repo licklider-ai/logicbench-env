@@ -52,7 +52,7 @@ def main(in_path: str, out_path: str, model: str | None = None):
     load_dotenv()
     with open("configs/settings.json","r",encoding="utf-8") as f:
         cfg = json.load(f)
-    model = model or cfg.get("model_name","gpt-4o-mini")
+    model = model or cfg.get("model_name","gpt-4o")
     temperature = cfg.get("temperature", 0.0)
     max_tokens = cfg.get("max_tokens", 300)
     retry_times = int(cfg.get("retry_times", 1))
