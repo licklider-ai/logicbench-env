@@ -23,3 +23,12 @@ reports/
 # OS / editor
 .DS_Store
 *.swp
+logs/
+runs/
+reports/
+*.bak
+*.bak.*
+logicbench_eval_pack*/
+logicbench_min_export/
+__pycache__/
+.DS_Store
