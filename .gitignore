@@ -1,8 +1,25 @@
-# Ignore output folders
+# venv / cache
+.venv/
+__pycache__/
+*.pyc
+
+# local config & secrets
+.env
+.env.*
+!.env.example
+
+# data & packs (共有不可 or 大容量)
+data/
+!data/README.md
+
+# run artifacts / logs / reports
 runs/
 reports/
+!reports/.gitkeep
 
-# But keep these directories tracked
-!runs/
-!reports/
+# archives
+*.zip
 
+# OS / editor
+.DS_Store
+*.swp
