@@ -1,96 +1,63 @@
-import os, json, time, sys, re
-import os
-SLEEP_SECS = float(os.getenv('LB_SLEEP','3'))
-
-import re, unicodedata
-
-VALID = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-def normalize_choice(text: str) -> str:
-    if not text:
-        return ""
-    t = unicodedata.normalize("NFKC", text)
-    m = re.search(r"[A-Za-z]", t)
-    if not m:
-        return ""
-    c = m.group(0).upper()
-    return c if c in VALID else ""
-from pathlib import Path
-import tiktoken
+import os, argparse
 from openai import OpenAI
-from openai import RateLimitError, APIConnectionError, APITimeoutError, APIError
+from lb_runtime import (
+    LLMCaller, RetryPolicy, load_jsonl, dump_obj, log_path, make_dbg_id
+)
 
-MODEL   = os.getenv("LB_MODEL", "gpt-4o-mini")
-IN_PATH = sys.argv[1] if len(sys.argv) > 1 else "data/dev_20.jsonl"
-OUT_PATH= sys.argv[2] if len(sys.argv) > 2 else "runs/dev20_pred.jsonl"
-USG_PATH= OUT_PATH.replace(".jsonl","_usage.jsonl")
-SLEEP_SEC = float(os.getenv("SLEEP_SEC", "21"))  # RPM=3に安全側
+MODEL_DEFAULT = os.getenv("LB_MODEL", "gpt-4o-mini")
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-enc = tiktoken.get_encoding("cl100k_base")
-def tok(s): 
-    try: return len(enc.encode(s or "")); 
-    except: return 0
+def ask_model(caller: LLMCaller, model: str, prompt: str,
+              temperature: float | None, top_p: float | None, dbg_id: str) -> str:
+    try:
+        return caller.call_chat(
+            model=model, system="You are a helpful judge.",
+            user=prompt, dbg_id=dbg_id,
+            temperature=temperature, top_p=top_p,
+        )
+    except Exception:
+        return caller.call_responses(
+            model=model, input_text=prompt, dbg_id=dbg_id,
+            temperature=temperature, top_p=top_p,
+        )
 
-# 既存結果の読み込み（途中再開）
-done_ids=set()
-if os.path.exists(OUT_PATH):
-    with open(OUT_PATH,encoding="utf-8") as f:
-        for l in f:
-            try: done_ids.add(json.loads(l)["id"])
-            except: pass
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("in_path")
+    ap.add_argument("out_path")
+    ap.add_argument("--model", default=MODEL_DEFAULT)
+    ap.add_argument("--temperature", type=float, default=None)
+    ap.add_argument("--top_p", type=float, default=None)
+    ap.add_argument("--retries", type=int, default=8)
+    ap.add_argument("--base_delay", type=float, default=1.0)
+    ap.add_argument("--max_delay", type=float, default=60.0)
+    args = ap.parse_args()
 
-Path("runs").mkdir(exist_ok=True)
-rows=[json.loads(l) for l in open(IN_PATH,encoding="utf-8") if l.strip()]
-total=len(rows)
-print(f"[start] {IN_PATH} -> {OUT_PATH} (total={total}, model={MODEL}, skip={len(done_ids)})", flush=True)
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        raise RuntimeError("OPENAI_API_KEY が未設定です。")
 
-f_out=open(OUT_PATH,"a",encoding="utf-8")
-f_usg=open(USG_PATH,"a",encoding="utf-8")
+    client = OpenAI(api_key=api_key)
+    policy = RetryPolicy(retries=args.retries, base_delay=args.base_delay, max_delay=args.max_delay)
+    caller = LLMCaller(client, retry=policy)
 
-done=len(done_ids)
-for ex in rows:
-    qid=ex.get("id")
-    if qid in done_ids:
-        continue
-    prompt=ex.get("input") or ""
-    while True:
-        try:
-            resp=client.chat.completions.create(
-                model=MODEL,
-                messages=[
-                    {"role":"system","content":"Return ONLY the final answer with no explanation. For yes/no, output exactly \"Yes\" or \"No\". For multiple-choice, output exactly one letter: A, B, C, or D."},
-                    {"role":"user","content":prompt}
-                ],
-                timeout=120, temperature=0,
-            )
-            break
-        except RateLimitError as e:
-            msg=str(e)
-            m=re.search(r"try again in (\d+)s", msg)
-            wait=int(m.group(1)) if m else max(20,int(SLEEP_SEC))
-            print(f"[429] waiting {wait}s ...", flush=True)
-            time.sleep(wait)
-        except (APIConnectionError, APITimeoutError, APIError) as e:
-            print(f"[warn] API error: {type(e).__name__}: {e} -> retry in 5s", flush=True)
-            time.sleep(5)
+    items = load_jsonl(args.in_path)
+    outputs = []
+    for i, row in enumerate(items):
+        dbg_id = make_dbg_id(i, prefix="eval")
+        prompt = row.get("prompt") or row.get("input") or ""
+        ans = ask_model(
+            caller, args.model, prompt,
+            temperature=args.temperature, top_p=args.top_p, dbg_id=dbg_id
+        )
+        outputs.append({"id": row.get("id", i), "output": ans, "dbg_id": dbg_id})
 
-    ans=resp.choices[0].message.content.strip()
-    json.dump({"id":qid,"pred":ans}, f_out, ensure_ascii=False); f_out.write("\n")
-    u=getattr(resp,"usage",None)
-    usage={
-        "id":qid,
-        "prompt_tokens_sdk":getattr(u,"prompt_tokens",None) if u else None,
-        "completion_tokens_sdk":getattr(u,"completion_tokens",None) if u else None,
-        "prompt_tokens_est":tok(prompt),
-        "completion_tokens_est":tok(ans),
-        "model":MODEL,
-        "ts":int(time.time()),
-    }
-    json.dump(usage, f_usg, ensure_ascii=False); f_usg.write("\n")
+    dump_obj(outputs, args.out_path)
+    dump_obj({
+        "model": args.model,
+        "temperature": args.temperature,
+        "top_p": args.top_p,
+        "count": len(outputs),
+    }, log_path("runs", f"runmeta-{make_dbg_id(prefix='meta')}.json"))
 
-    done+=1
-    print(f"[{done}/{total}] {qid} ✓  sleeping {int(SLEEP_SEC)}s", flush=True)
-    time.sleep(SLEEP_SEC)
-
-f_out.close(); f_usg.close()
-print(f"[done] outputs: {OUT_PATH}\n[done] usage:   {USG_PATH}")
+if __name__ == "__main__":
+    main()
