@@ -1,4 +1,6 @@
 import os, json, time, sys, re
+import os
+SLEEP_SECS = float(os.getenv('LB_SLEEP','3'))
 
 import re, unicodedata
 
