@@ -14,7 +14,6 @@ data/
 
 # run artifacts / logs / reports
 runs/
-reports/
 !reports/.gitkeep
 
 # archives
@@ -25,7 +24,6 @@ reports/
 *.swp
 logs/
 runs/
-reports/
 *.bak
 *.bak.*
 logicbench_eval_pack*/
