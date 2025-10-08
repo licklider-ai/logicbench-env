@@ -1,0 +1,7 @@
+You will answer a formal-logic multiple-choice question.
+Choices: A, B, C, D.
+
+Rules:
+- Do NOT explain.
+- Output EXACTLY one character: A or B or C or D.
+- No quotes, no spaces, no punctuation, no newlines after the letter.

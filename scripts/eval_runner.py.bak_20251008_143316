@@ -1,0 +1,166 @@
+import os, json, time, re, sys, random
+from pathlib import Path
+from typing import Dict, Any, List, Tuple, Optional
+from openai import OpenAI
+
+MODEL   = os.getenv("LB_MODEL", "gpt-4o-mini")
+IN_PATH = os.getenv("LB_DEV_PATH", "data/dev_20.jsonl")
+OUT_PATH= os.getenv("LB_OUT_PATH", "runs/pred_raw.jsonl")
+
+LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+# ---- OpenAI client ----
+_api = os.getenv("OPENAI_API_KEY")
+if not _api:
+    print("ERROR: OPENAI_API_KEY is not set.", file=sys.stderr)
+    sys.exit(2)
+client = OpenAI(api_key=_api)
+
+# ---- prompt builders ----
+def build_prompt(stem: str, choices: List[str]) -> Tuple[str, str, str]:
+    chu = [str(c).strip().upper() for c in choices]
+    is_yn = False
+    if len(chu) == 2 and set(chu) <= {"YES","NO","TRUE","FALSE"}:
+        is_yn = True
+    if set(chu) <= {"YES","NO"}:
+        is_yn = True
+
+    if is_yn:
+        system = (
+            "Answer with EXACTLY ONE token from this set: YES,NO. "
+            "No words, no punctuation, no spaces, no quotes."
+        )
+        user = f"{stem}\n\nReturn only one token: YES or NO."
+        valid = "YESNO"
+        return system, user, valid
+
+    valid = LETTERS[:len(choices)]
+    system = (
+        f"Answer with EXACTLY ONE uppercase letter from this set: {','.join(list(valid))}. "
+        "No words, no punctuation, no spaces, no quotes."
+    )
+    user = (
+        f"{stem}\n\nChoices:\n"
+        + "\n".join([f"{LETTERS[i]}. {c}" for i, c in enumerate(choices)])
+        + f"\n\nReturn only one letter from [{valid}] and nothing else."
+    )
+    return system, user, valid
+
+# ---- extractors ----
+_ANS_RE = re.compile(r'\bANSWER:\s*([A-Z]|YES|NO|TRUE|FALSE|T|F|-?\d+)\b', re.I)
+def _norm_short_token(s: str) -> str:
+    s = s.strip().upper()
+    s = s.replace("TRUE","YES").replace("FALSE","NO")
+    if s == "T": s = "YES"
+    if s == "F": s = "NO"
+    return s
+
+def extract_one_token(raw: str, k: int, mode_letters: bool) -> Optional[str]:
+    if not raw:
+        return None
+    txt = raw.strip()
+    m = _ANS_RE.search(txt)
+    if m:
+        cand = _norm_short_token(m.group(1))
+    else:
+        cand = _norm_short_token(txt)
+        if mode_letters and not re.fullmatch(r'[A-Z]', cand):
+            m2 = re.fullmatch(r'([A-Z])[\.\s]*', txt.strip(), re.I)
+            if m2:
+                cand = m2.group(1).upper()
+    if mode_letters:
+        if re.fullmatch(r'[A-Z]', cand) and (ord(cand) - 65) < k:
+            return cand
+        return None
+    else:
+        return cand if cand in {"YES","NO"} else None
+
+# ---- API calls with retry ----
+def call_chat(system: str, user: str, budget: int) -> str:
+    return client.chat.completions.create(
+        model=MODEL,
+        messages=[{"role":"system","content":system},{"role":"user","content":user}],
+        max_completion_tokens=budget,
+        temperature=0,
+    ).choices[0].message.content or ""
+
+def call_with_retries(system: str, user: str, k: int, mode_letters: bool) -> Tuple[Optional[str], str]:
+    budgets = (64, 128, 256)
+    last_raw = ""
+    for b in budgets:
+        try:
+            raw = call_chat(system, user, budget=b)
+            last_raw = raw
+            tok = extract_one_token(raw, k, mode_letters)
+            if tok is not None:
+                return tok, raw
+        except Exception as e:
+            time.sleep(0.8 + random.random())
+            last_raw = f"[chat.error: {e}]"
+            continue
+    return None, last_raw
+
+# ---- input normalization ----
+def to_stem_choices(sample: Dict[str, Any]) -> Tuple[str, List[str]]:
+    if "stem" in sample and "choices" in sample and sample["choices"]:
+        return str(sample["stem"]), [str(c) for c in sample["choices"]]
+    content = ""
+    if isinstance(sample.get("input"), list):
+        for turn in sample["input"]:
+            if turn.get("role") == "user":
+                content = turn.get("content","")
+                break
+    else:
+        content = sample.get("input","")
+    ch = re.findall(r'\n([A-D])\.\s*([^\n]+)', content)
+    choices = [re.sub(r'^[A-D]\.\s*', '', c[1]).strip() for c in ch]
+    m = re.search(r'\nA\.', content)
+    stem = content[:m.start()].strip() if m else content.strip()
+    return stem, choices
+
+def main():
+    IN = Path(IN_PATH); OUT = Path(OUT_PATH)
+    items: List[Dict[str, Any]] = []
+    with IN.open("r", encoding="utf-8") as f:
+        for l in f:
+            if not l.strip(): continue
+            items.append(json.loads(l))
+    total = len(items)
+    print(f"[start] {IN_PATH} -> {OUT_PATH} (total={total}, model={MODEL})", flush=True)
+
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    norm_path = OUT.with_name("pred_normalized.jsonl")
+
+    ok_rows = 0
+    with OUT.open("w", encoding="utf-8") as gout, norm_path.open("w", encoding="utf-8") as gnorm:
+        for i, s in enumerate(items, 1):
+            sid = s.get("id") or s.get("sample_id") or s.get("qid") or s.get("question_id")
+            stem, choices = to_stem_choices(s)
+            assert stem, f"empty stem at index {i-1}"
+            assert choices, f"empty choices at index {i-1}"
+
+            system, user, valid = build_prompt(stem, choices)
+            mode_letters = (valid != "YESNO")
+            k = len(choices) if mode_letters else 2
+
+            tok, raw = call_with_retries(system, user, k, mode_letters)
+            gout.write(json.dumps({"id": sid, "raw": raw}, ensure_ascii=False) + "\n")
+
+            if tok is None:
+                raise SystemExit(f"FORMAT ERROR: id={sid} raw='{(raw or '')[:80]}' → 単一トークン抽出に失敗")
+
+            out_tok = _norm_short_token(tok)
+            if mode_letters:
+                assert re.fullmatch(r'[A-Z]', out_tok) and (ord(out_tok)-65) < k, f"invalid letter '{out_tok}' for id={sid}"
+            else:
+                assert out_tok in {"YES","NO"}, f"invalid YES/NO '{out_tok}' for id={sid}"
+
+            gnorm.write(json.dumps({"id": sid, "output": out_tok}, ensure_ascii=False) + "\n")
+            ok_rows += 1
+            print(f"[{i}/{total}] {sid} ✓ {out_tok}", flush=True)
+
+    print(f"[done] raw -> {OUT_PATH}")
+    print(f"[done] normalized -> {norm_path} ({ok_rows} rows)")
+
+if __name__ == "__main__":
+    main()

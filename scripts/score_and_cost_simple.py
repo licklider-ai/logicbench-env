@@ -1,0 +1,88 @@
+import json, csv, argparse
+from pathlib import Path
+from collections import defaultdict, Counter
+import re
+
+def norm(s:str)->str:
+    if s is None: return ""
+    u = str(s).strip().upper()
+    m = re.search(r'ANSWER:\s*([A-Z]|YES|NO|TRUE|FALSE|[-+]?\d+)\b', u)
+    if m: u = m.group(1)
+    if "TRUE" in u: u = "YES"
+    if "FALSE" in u: u = "NO"
+    if u == "T": u = "YES"
+    if u == "F": u = "NO"
+    return u.split()[0].strip(",.;:") if u else ""
+
+def load_map(path: Path, key="id", val="label"):
+    mp={}
+    with path.open() as f:
+        for l in f:
+            o=json.loads(l)
+            if key in o and val in o:
+                mp[o[key]]=str(o[val]).strip()
+            elif key in o and "answer" in o:
+                mp[o[key]]=str(o["answer"]).strip()
+            elif key in o and "gold" in o:
+                mp[o[key]]=str(o["gold"]).strip()
+    return mp
+
+def main():
+    ap=argparse.ArgumentParser()
+    ap.add_argument("--pred", required=True)
+    ap.add_argument("--gold", required=True)
+    ap.add_argument("--out", required=True)
+    ap.add_argument("--model_price_in", type=float, default=0.0002)
+    ap.add_argument("--model_price_out", type=float, default=0.0008)
+    args=ap.parse_args()
+
+    pred_p = Path(args.pred)
+    gold_p = Path(args.gold)
+    out_p  = Path(args.out)
+
+    gold = load_map(gold_p, key="id", val="label")
+
+    rows=[]
+    cat_cnt=Counter(); cat_hit=Counter(); cat_cost=defaultdict(float)
+    total_hit=0; total=0; total_cost=0.0
+
+    with pred_p.open() as f:
+        for l in f:
+            o=json.loads(l)
+            sid=o.get("id")
+            raw=o.get("pred_raw")
+            cat=o.get("category") or "unknown"
+            g=gold.get(sid)
+            p=norm(raw)
+            correct = (str(p).upper()==str(g).upper()) if g is not None else None
+
+            usage=o.get("usage") or {}
+            pt=usage.get("prompt_tokens") or 0
+            ct=usage.get("completion_tokens") or 0
+            cost = (pt/1000.0)*args.model_price_in + (ct/1000.0)*args.model_price_out
+
+            rows.append([sid,cat,g,p,int(bool(correct and g is not None)),f"{cost:.6f}"])
+            if g is not None:
+                total+=1
+                if correct: total_hit+=1
+            total_cost+=cost
+            cat_cnt[cat]+=1
+            if g is not None and correct: cat_hit[cat]+=1
+            cat_cost[cat]+=cost
+
+    out_p.parent.mkdir(parents=True, exist_ok=True)
+    with out_p.open("w", newline="") as f:
+        w=csv.writer(f)
+        w.writerow(["id","category","gold","pred","correct","cost_usd"])
+        w.writerows(rows)
+
+    acc = (total_hit/total) if total else 0.0
+    print("\n== Summary ==")
+    print(f"Total: {total}  Correct: {total_hit}  Accuracy: {acc:.3f}  Cost: ${total_cost:.4f}")
+    print("\n== By Category ==")
+    for c in sorted(cat_cnt.keys()):
+        cnt=cat_cnt[c]; hit=cat_hit[c]; cacc=hit/cnt if cnt else 0.0
+        print(f"{c:12s}  n={cnt:2d}  acc={cacc:.3f}  cost=${cat_cost[c]:.4f}")
+
+if __name__=="__main__":
+    main()
