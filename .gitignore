@@ -39,3 +39,4 @@ __pycache__/
 !data/
 !data/dev_full.jsonl
 !data/gold_full.jsonl
+data/logicbench_src/
