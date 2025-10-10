@@ -105,7 +105,7 @@ print("WROTE:", out)
 PY
 
 echo "=== Step 3: レポート生成 ==="
-python3 scripts/make_report_simple.py \
+python3 scripts/report_simple.py \
   reports/summary_latest_override.csv \
   reports/logicbench_test_report_latest_override.md
 
