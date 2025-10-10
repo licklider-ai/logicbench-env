@@ -30,3 +30,7 @@ logicbench_eval_pack*/
 logicbench_min_export/
 __pycache__/
 .DS_Store
+
+# Track benchmark JSONLs in data/
+!data/dev_full.jsonl
+!data/gold_full.jsonl
