@@ -46,6 +46,21 @@ def normalize_to_one_letter(s: str) -> str:
         return m.group(1).upper()
     return ""
 
+def _is_effectively_empty(prompt: str) -> bool:
+    t = (prompt or '').strip()
+    # 'Question:' のみ、あるいは2行以内で本文がない
+    core = t.splitlines()
+    if not core:
+        return True
+    # 先頭が 'Question:' だけで、次行以降が指示文しかない
+    headline = core[0].strip()
+    if headline in {'Question:', 'Q:', '問題:'}:
+        return True
+    # 実質本文の長さが短すぎる（< 5文字）
+    if len(headline) < 5:
+        return True
+    return False
+
 def build_prompt(row: dict) -> str:
     # 1) 問題文候補（input/text までフォールバック）
     q = row.get("question") or row.get("q") or row.get("prompt") or row.get("input") or row.get("text") or ""
@@ -152,7 +167,11 @@ def main():
             is_logic = ("bqa" in cat) or ("logic" in cat) or (len(q) > 180)
 
             prompt = build_prompt(row)
-            raw, usage = call_openai(prompt, is_logic)
+                        # 空っぽ問題は推論せず NONE
+            if _is_effectively_empty(prompt):
+                raw, usage = "NONE", None
+            else:
+                raw, usage = call_openai(prompt, is_logic)
             pred = normalize_to_one_letter(raw)
             if pred not in LETTER_SET:
                 pred = "NONE"

@@ -1,0 +1,210 @@
+
+# --- OpenAI client (project-aware) ------------------------------
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_PROJECT = os.getenv("OPENAI_PROJECT")  # prj_...
+if not OPENAI_API_KEY:
+    raise RuntimeError("OPENAI_API_KEY が未設定です。")
+client = OpenAI(api_key=OPENAI_API_KEY, project=OPENAI_PROJECT)
+from __future__ import annotations
+import os, sys, time, math, random, re, pathlib, typing as T
+from datetime import datetime, timezone
+from dataclasses import dataclass
+from openai import OpenAI  # ← ここに移動（future import の後）
+# ---- orjson 優先・json フォールバック ---------------------------------------
+try:
+    import orjson as _orjson
+    def _dumps(obj) -> bytes:
+        return _orjson.dumps(obj, option=_orjson.OPT_INDENT_2)
+    def _loads(b: T.Union[bytes, bytearray, memoryview, str]):
+        return _orjson.loads(b)
+    _ORJSON = True
+except Exception:
+    import json as _json
+    def _dumps(obj) -> bytes:
+        return _json.dumps(obj, ensure_ascii=False, indent=2).encode("utf-8")
+    def _loads(b):
+        if isinstance(b, (bytes, bytearray, memoryview)):
+            b = bytes(b).decode("utf-8")
+        return _json.loads(b)
+    _ORJSON = False
+
+# ---- パス/ログ基盤 ------------------------------------------------------------
+DEFAULT_LOG_DIR = os.environ.get("LB_LOG_DIR", "logs")
+
+def ensure_dir(p: T.Union[str, pathlib.Path]) -> pathlib.Path:
+    p = pathlib.Path(p)
+    p.mkdir(parents=True, exist_ok=True)
+    return p
+
+def log_path(*parts: str) -> pathlib.Path:
+    d = ensure_dir(DEFAULT_LOG_DIR)
+    return d.joinpath(*parts)
+
+def now_ts() -> str:
+    return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+def make_dbg_id(index: int | None = None, prefix: str = "job") -> str:
+    suf = f"-{index:04d}" if index is not None else ""
+    return f"{prefix}-{now_ts()}{suf}"
+
+def dump_obj(obj: T.Any, path: T.Union[str, pathlib.Path]) -> pathlib.Path:
+    path = pathlib.Path(path)
+    ensure_dir(path.parent)
+    data = _dumps(obj)
+    path.write_bytes(data)
+    return path
+
+def load_jsonl(path: T.Union[str, pathlib.Path]) -> T.List[T.Any]:
+    path = pathlib.Path(path)
+    out = []
+    with path.open("rb") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            out.append(_loads(line))
+    return out
+
+# ---- レートリミット/一時障害に強いリトライ ------------------------------------
+@dataclass
+class RetryPolicy:
+    retries: int = 8
+    base_delay: float = 1.0
+    max_delay: float = 60.0
+    jitter: float = 0.25
+    backoff_factor: float = 2.0
+    retry_on_status: T.Tuple[int, ...] = (429, 500, 502, 503, 504)
+
+def _sleep_with_jitter(delay: float, jitter: float):
+    lo = max(0.0, delay * (1.0 - jitter))
+    hi = delay * (1.0 + jitter)
+    time.sleep(random.uniform(lo, hi))
+
+# ---- OpenAI クライアント呼び出し（chat / responses）の堅牢ラッパー ----------
+class LLMCaller:
+    def __init__(self, client, retry: RetryPolicy | None = None):
+        self.client = client
+        self.retry = retry or RetryPolicy()
+
+    def call_chat(
+        self,
+        *,
+        model: str,
+        system: str,
+        user: str,
+        dbg_id: str,
+        temperature: float | None = None,
+        top_p: float | None = None,
+        extra: dict | None = None,
+    ) -> str:
+        """chat.completions with retry & backoff"""
+        payload = {
+            "model": model,
+            "messages": [
+                {"role": "system", "content": system},
+                {"role": "user", "content": user}
+            ],
+        }
+        if temperature is not None:
+            payload["temperature"] = float(temperature)
+        if top_p is not None:
+            payload["top_p"] = float(top_p)
+        if extra:
+            payload.update(extra)
+
+        delay = self.retry.base_delay
+        last_err = None
+        for attempt in range(self.retry.retries + 1):
+            try:
+                rc = self.client.chat.completions.create(**payload)
+                text = rc.choices[0].message.content
+                dump_obj(
+                    {"dbg_id": dbg_id, "payload": payload, "response": text},
+                    log_path("calls", f"{dbg_id}-chat.json"),
+                )
+                return text
+            except Exception as e:
+                last_err = e
+                status = getattr(getattr(e, "response", None), "status_code", None)
+                if status is None:
+                    status = getattr(e, "status_code", None)
+                retriable = (status in self.retry.retry_on_status) or (status is None)
+                dump_obj(
+                    {
+                        "dbg_id": dbg_id,
+                        "payload": payload,
+                        "error": repr(e),
+                        "status": status,
+                        "attempt": attempt,
+                    },
+                    log_path("errors", f"{dbg_id}-chat-at{attempt}.json"),
+                )
+                if retriable and attempt < self.retry.retries:
+                    _sleep_with_jitter(delay, self.retry.jitter)
+                    delay = min(self.retry.max_delay, delay * self.retry.backoff_factor)
+                    continue
+                raise
+
+        raise last_err or RuntimeError("Unknown error in call_chat")
+
+    def call_responses(
+        self,
+        *,
+        model: str,
+        input_text: str,
+        dbg_id: str,
+        temperature: float | None = None,
+        top_p: float | None = None,
+        extra: dict | None = None,
+    ) -> str:
+        """responses.create with retry & backoff"""
+        payload = {
+            "model": model,
+            "input": [{"role": "user", "content": input_text}],
+        }
+        if temperature is not None:
+            payload["temperature"] = float(temperature)
+        if top_p is not None:
+            payload["top_p"] = float(top_p)
+        if extra:
+            payload.update(extra)
+
+        delay = self.retry.base_delay
+        last_err = None
+        for attempt in range(self.retry.retries + 1):
+            try:
+                rc = self.client.responses.create(**payload)
+                if hasattr(rc, "output_text"):
+                    text = rc.output_text
+                elif hasattr(rc, "choices"):
+                    text = rc.choices[0].message.content
+                else:
+                    text = str(rc)
+                dump_obj(
+                    {"dbg_id": dbg_id, "payload": payload, "response": text},
+                    log_path("calls", f"{dbg_id}-resp.json"),
+                )
+                return text
+            except Exception as e:
+                last_err = e
+                status = getattr(getattr(e, "response", None), "status_code", None)
+                if status is None:
+                    status = getattr(e, "status_code", None)
+                retriable = (status in self.retry.retry_on_status) or (status is None)
+                dump_obj(
+                    {
+                        "dbg_id": dbg_id,
+                        "payload": payload,
+                        "error": repr(e),
+                        "status": status,
+                        "attempt": attempt,
+                    },
+                    log_path("errors", f"{dbg_id}-resp-at{attempt}.json"),
+                )
+                if retriable and attempt < self.retry.retries:
+                    _sleep_with_jitter(delay, self.retry.jitter)
+                    delay = min(self.retry.max_delay, delay * self.retry.backoff_factor)
+                    continue
+                raise
+
+        raise last_err or RuntimeError("Unknown error in call_responses")

@@ -34,3 +34,8 @@ __pycache__/
 # Track benchmark JSONLs in data/
 !data/dev_full.jsonl
 !data/gold_full.jsonl
+
+# Track specific data files
+!data/
+!data/dev_full.jsonl
+!data/gold_full.jsonl
