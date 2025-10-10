@@ -9,11 +9,10 @@ SYSTEM_PROMPT = (
     "Read the question and options carefully and answer with EXACTLY ONE letter among {A,B,C,D}. "
     "If unsure, guess uniformly among A,B,C,D. Output ONLY the letter, no punctuation or words."
 )
-
 FEW_SHOT = [
-    {"role":"user","content":"Question: Is 2+2 equal to 4?\\nRespond with exactly ONE letter from {A,B,C,D}. For yes/no tasks, use A=YES/TRUE, B=NO/FALSE. Do not output anything else."},
+    {"role":"user","content":"Question: Is 2+2 equal to 4?\nRespond with exactly ONE letter from {A,B,C,D}. For yes/no tasks, use A=YES/TRUE, B=NO/FALSE. Do not output anything else."},
     {"role":"assistant","content":"A"},
-    {"role":"user","content":"Question: Is the sky green during a normal day?\\nRespond with exactly ONE letter from {A,B,C,D}. For yes/no tasks, use A=YES/TRUE, B=NO/FALSE. Do not output anything else."},
+    {"role":"user","content":"Question: Is the sky green during a normal day?\nRespond with exactly ONE letter from {A,B,C,D}. For yes/no tasks, use A=YES/TRUE, B=NO/FALSE. Do not output anything else."},
     {"role":"assistant","content":"B"},
 ]
 
@@ -48,7 +47,23 @@ def normalize_to_one_letter(s: str) -> str:
     return ""
 
 def build_prompt(row: dict) -> str:
+    # 1) 問題文候補（input/text までフォールバック）
     q = row.get("question") or row.get("q") or row.get("prompt") or row.get("input") or row.get("text") or ""
+
+    # 1a) q が JSON配列の文字列（チャット履歴）なら user の content を抽出
+    if isinstance(q, str) and q.strip().startswith('['):
+        try:
+            obj = json.loads(q)
+            if isinstance(obj, list) and all(isinstance(x, dict) for x in obj):
+                user_msgs = [x.get('content','') for x in obj if x.get('role')=='user']
+                if user_msgs:
+                    q = user_msgs[-1]
+                else:
+                    q = "\n".join([x.get('content','') for x in obj if 'content' in x])
+        except Exception:
+            pass
+
+    # 2) 選択肢を抽出
     option_fields = ["options","choices","answers","candidates","cand","opts","alternatives"]
     opts = None
     for k in option_fields:
@@ -56,10 +71,11 @@ def build_prompt(row: dict) -> str:
         if v:
             opts = v
             break
+
     labels = ["A","B","C","D"]
-    if opts is None:
-        if all((L in row) for L in labels):
-            opts = [row.get(L,"") for L in labels]
+    if opts is None and all((L in row) for L in labels):
+        opts = [row.get(L,"") for L in labels]
+
     if isinstance(opts, dict):
         if any(k in opts for k in labels):
             opts = [opts.get(L,"") for L in labels if L in opts]
@@ -70,6 +86,7 @@ def build_prompt(row: dict) -> str:
         else:
             opts = list(opts.values())[:4]
 
+    # 3) プロンプト構成
     lines = [str(q).rstrip(), ""]
     if isinstance(opts, list) and opts:
         for i, opt in enumerate(opts[:4]):
@@ -87,8 +104,9 @@ def build_prompt(row: dict) -> str:
     return "\n".join(lines).strip()
 
 def call_openai(prompt: str, is_logic: bool):
-    # Use OpenAI if available; otherwise fallback to "A"
+    # API 失敗時は "A" フォールバック
     try:
+        import os
         from openai import OpenAI
         client = OpenAI()
         messages = [{"role":"system","content": SYSTEM_PROMPT}] + FEW_SHOT + [{"role":"user","content": prompt}]
@@ -104,7 +122,11 @@ def call_openai(prompt: str, is_logic: bool):
         raw = (resp.choices[0].message.content or "").strip()
         usage = getattr(resp, "usage", None)
         return raw, usage
-    except Exception:
+    except Exception as e:
+        # うるさくなりすぎないよう1回だけ出す
+        if os.getenv("LB_VERBOSE") and not getattr(call_openai, "_warned", False):
+            print(f"[runner_loose] OpenAI call failed: {e}", file=sys.stderr)
+            call_openai._warned = True
         return "A", None
 
 # ===== Main =====
@@ -124,7 +146,8 @@ def main():
             if not line:
                 continue
             row = json.loads(line)
-            q = row.get("question") or row.get("q") or row.get("prompt") or ""
+
+            q = row.get("question") or row.get("q") or row.get("prompt") or row.get("input") or row.get("text") or ""
             cat = str(row.get("category","")).lower()
             is_logic = ("bqa" in cat) or ("logic" in cat) or (len(q) > 180)
 
@@ -153,20 +176,7 @@ def main():
             }
             fout.write(json.dumps(out, ensure_ascii=False) + "\n")
             n += 1
-
     print(n)
 
 if __name__ == "__main__":
     main()
-    # if q looks like serialized chat messages (JSON array), extract user content
-    if isinstance(q, str) and q.strip().startswith('['):
-        try:
-            obj = json.loads(q)
-            if isinstance(obj, list) and all(isinstance(x, dict) for x in obj):
-                user_msgs = [x.get('content','') for x in obj if x.get('role')=='user']
-                if user_msgs:
-                    q = user_msgs[-1]
-                else:
-                    q = '\n'.join([x.get('content','') for x in obj if 'content' in x])
-        except Exception:
-            pass
