@@ -40,3 +40,6 @@ __pycache__/
 !data/dev_full.jsonl
 !data/gold_full.jsonl
 data/logicbench_src/
+
+# allow tracking of top-level reports
+!reports/**
