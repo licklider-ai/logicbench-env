@@ -1,0 +1,10 @@
+run	id	category	question	model_answer	answer_regex
+runs/20251014_112434	q19	lang	英語で「ありがとう」を答えてください（短く）。	Thank you.	^(thank\s*you|thanks)$
+runs/20251014_112434	q7	knowledge	2024年はうるう年ですか？はい/いいえのみ。	はい。	^(はい|yes)$
+runs/20251014_112434	q18	devops	Dockerで実行中コンテナ一覧コマンドは？コマンドのみ。	`docker ps`	^docker\s+ps$
+runs/20251014_112434	q11	logic	57は奇数ですか？はい/いいえのみ。	はい。	^(はい|yes)$
+runs/20251014_113425	q18	devops	Dockerで実行中コンテナ一覧コマンドは？コマンドのみ。	`docker ps`	^docker\s+ps$
+runs/20251014_113425	q11	logic	57は奇数ですか？はい/いいえのみ。	はい。	^(はい|yes)$
+runs/20251014_113425	q17	devops	Gitで最新コミットの短縮ハッシュを表示するコマンドは？コマンドのみ。	`git rev-parse --short HEAD`	^git\s+rev-parse\s+--short\s+HEAD$
+runs/20251014_113425	q19	lang	英語で「ありがとう」を答えてください（短く）。	Thank you.	^(thank\s*you|thanks)$
+runs/20251014_113425	q7	knowledge	2024年はうるう年ですか？はい/いいえのみ。	はい。	^(はい|yes)$

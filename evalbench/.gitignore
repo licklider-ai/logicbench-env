@@ -1,0 +1,11 @@
+# secrets
+.openai_user_key
+.openai_api_key
+
+# cache & raw responses
+runs/*/cache/
+runs/*/resp_*.json
+
+# OS/editor
+.DS_Store
+*.swp
