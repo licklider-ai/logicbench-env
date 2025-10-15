@@ -4,14 +4,18 @@
 - Total samples: 20
 - Overall accuracy: **90.00%** (18/20)
 
-## Per-category accuracy
+## Tokens & Cost
+- Prompt tokens: N/A
+- Completion tokens: N/A
+- Unit price (/1K): N/A
+- Est. cost: N/A
 
+## Per-category accuracy
 | category | samples | correct | acc(%) |
 |---|---:|---:|---:|
 | unknown | 20 | 18 | 90.00 |
 
 ## Misses (first 20)
-
 | id | category | model_answer | gold | answer_regex |
 |---|---|---|---|---|
 | rebuild:016 | unknown | A | D. 12 | ^(?:D\.?\|D\.\s*12\|12)$ |
