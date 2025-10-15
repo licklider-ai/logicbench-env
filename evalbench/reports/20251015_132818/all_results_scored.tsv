@@ -1,0 +1,181 @@
+id	category	model	latency_ms	prompt	final_answer	gold	answer_regex	correct
+rebuild:001	unknown	gpt-4o-mini	2802	"What is 3 + 2?
+
+Choices:
+A. 3
+B. 2
+C. 5
+D. 8
+
+Answer:"	C. 5			0
+rebuild:002	unknown	gpt-4o-mini	1510	"What is 3 + 3?
+
+Choices:
+A. 3
+B. 2
+C. 4
+D. 6
+
+Answer:"	D			0
+rebuild:003	unknown	gpt-4o-mini	1275	"What is 5 + 2?
+
+Choices:
+A. 10
+B. 7
+C. 12
+D. 9
+
+Answer:"	B			0
+rebuild:004	unknown	gpt-4o-mini	1275	"What is 8 + 5?
+
+Choices:
+A. 15
+B. 12
+C. 17
+D. 13
+
+Answer:"	13			0
+rebuild:005	unknown	gpt-4o-mini	1579	"What is 2 + 4?
+
+Choices:
+A. 5
+B. 4
+C. 3
+D. 6
+
+Answer:"	D			0
+rebuild:006	unknown	gpt-4o-mini	4743	"What is 8 + 3?
+
+Choices:
+A. 15
+B. 10
+C. 11
+D. 13
+
+Answer:"	11			0
+rebuild:007	unknown	gpt-4o-mini	1344	"What is 6 + 2?
+
+Choices:
+A. 10
+B. 5
+C. 9
+D. 8
+
+Answer:"	8			0
+rebuild:008	unknown	gpt-4o-mini	1692	"What is 3 + 6?
+
+Choices:
+A. 11
+B. 7
+C. 9
+D. 12
+
+Answer:"	9			0
+rebuild:009	unknown	gpt-4o-mini	1735	"What is 3 + 2?
+
+Choices:
+A. 9
+B. 5
+C. 4
+D. 2
+
+Answer:"	5			0
+rebuild:010	unknown	gpt-4o-mini	-1745	"What is 5 + 3?
+
+Choices:
+A. 7
+B. 9
+C. 11
+D. 8
+
+Answer:"	8			0
+rebuild:011	unknown	gpt-4o-mini	1107	"What is 7 + 4?
+
+Choices:
+A. 10
+B. 9
+C. 11
+D. 14
+
+Answer:"	11			0
+rebuild:012	unknown	gpt-4o-mini	1238	"What is 6 + 3?
+
+Choices:
+A. 11
+B. 9
+C. 12
+D. 7
+
+Answer:"	9			0
+rebuild:013	unknown	gpt-4o-mini	1289	"What is 4 + 9?
+
+Choices:
+A. 12
+B. 16
+C. 18
+D. 13
+
+Answer:"	13			0
+rebuild:014	unknown	gpt-4o-mini	1242	"What is 5 + 7?
+
+Choices:
+A. 12
+B. 10
+C. 16
+D. 9
+
+Answer:"	A. 12			0
+rebuild:015	unknown	gpt-4o-mini	1076	"What is 7 + 8?
+
+Choices:
+A. 12
+B. 13
+C. 15
+D. 17
+
+Answer:"	15			0
+rebuild:016	unknown	gpt-4o-mini	1380	"What is 7 + 5?
+
+Choices:
+A. 13
+B. 15
+C. 11
+D. 12
+
+Answer:"	A			0
+rebuild:017	unknown	gpt-4o-mini	2141	"What is 6 + 8?
+
+Choices:
+A. 13
+B. 12
+C. 15
+D. 14
+
+Answer:"	14			0
+rebuild:018	unknown	gpt-4o-mini	1073	"What is 3 + 2?
+
+Choices:
+A. 5
+B. 3
+C. 8
+D. 6
+
+Answer:"	A. 5			0
+rebuild:019	unknown	gpt-4o-mini	1742	"What is 3 + 8?
+
+Choices:
+A. 13
+B. 12
+C. 14
+D. 11
+
+Answer:"	A. 13			0
+rebuild:020	unknown	gpt-4o-mini	1502	"What is 2 + 3?
+
+Choices:
+A. 9
+B. 8
+C. 5
+D. 4
+
+Answer:"	5			0
