@@ -1,0 +1,21 @@
+id	category	model	latency_ms	prompt	final_answer	gold	answer_regex	correct
+rebuild:001	math	gpt-4o-mini	2570	What is 3 + 2? Choices: A. 3 B. 2 C. 5 D. 8 Answer:	C. 5	C. 5	^(?:C\.?|C\.\s*5|5)$	1
+rebuild:002	math	gpt-4o-mini	1890	What is 3 + 3? Choices: A. 3 B. 2 C. 4 D. 6 Answer:	6	D. 6	^(?:D\.?|D\.\s*6|6)$	1
+rebuild:003	math	gpt-4o-mini	1998	What is 5 + 2? Choices: A. 10 B. 7 C. 12 D. 9 Answer:	B	B. 7	^(?:B\.?|B\.\s*7|7)$	1
+rebuild:004	math	gpt-4o-mini	2065	What is 8 + 5? Choices: A. 15 B. 12 C. 17 D. 13 Answer:	13	D. 13	^(?:D\.?|D\.\s*13|13)$	1
+rebuild:005	math	gpt-4o-mini	1050	What is 2 + 4? Choices: A. 5 B. 4 C. 3 D. 6 Answer:	D	D. 6	^(?:D\.?|D\.\s*6|6)$	1
+rebuild:006	math	gpt-4o-mini	1306	What is 8 + 3? Choices: A. 15 B. 10 C. 11 D. 13 Answer:	11	C. 11	^(?:C\.?|C\.\s*11|11)$	1
+rebuild:007	math	gpt-4o-mini	1228	What is 6 + 2? Choices: A. 10 B. 5 C. 9 D. 8 Answer:	8	D. 8	^(?:D\.?|D\.\s*8|8)$	1
+rebuild:008	math	gpt-4o-mini	1036	What is 3 + 6? Choices: A. 11 B. 7 C. 9 D. 12 Answer:	9	C. 9	^(?:C\.?|C\.\s*9|9)$	1
+rebuild:009	math	gpt-4o-mini	2058	What is 3 + 2? Choices: A. 9 B. 5 C. 4 D. 2 Answer:	5	B. 5	^(?:B\.?|B\.\s*5|5)$	1
+rebuild:010	math	gpt-4o-mini	1375	What is 5 + 3? Choices: A. 7 B. 9 C. 11 D. 8 Answer:	8	D. 8	^(?:D\.?|D\.\s*8|8)$	1
+rebuild:011	math	gpt-4o-mini	1205	What is 7 + 4? Choices: A. 10 B. 9 C. 11 D. 14 Answer:	11	C. 11	^(?:C\.?|C\.\s*11|11)$	1
+rebuild:012	math	gpt-4o-mini	1271	What is 6 + 3? Choices: A. 11 B. 9 C. 12 D. 7 Answer:	9	B. 9	^(?:B\.?|B\.\s*9|9)$	1
+rebuild:013	math	gpt-4o-mini	1468	What is 4 + 9? Choices: A. 12 B. 16 C. 18 D. 13 Answer:	13	D. 13	^(?:D\.?|D\.\s*13|13)$	1
+rebuild:014	math	gpt-4o-mini	2013	What is 5 + 7? Choices: A. 12 B. 10 C. 16 D. 9 Answer:	A	A. 12	^(?:A\.?|A\.\s*12|12)$	1
+rebuild:015	math	gpt-4o-mini	1156	What is 7 + 8? Choices: A. 12 B. 13 C. 15 D. 17 Answer:	15	C. 15	^(?:C\.?|C\.\s*15|15)$	1
+rebuild:016	math	gpt-4o-mini	1387	What is 7 + 5? Choices: A. 13 B. 15 C. 11 D. 12 Answer:	A	D. 12	^(?:D\.?|D\.\s*12|12)$	0
+rebuild:017	math	gpt-4o-mini	1050	What is 6 + 8? Choices: A. 13 B. 12 C. 15 D. 14 Answer:	14	D. 14	^(?:D\.?|D\.\s*14|14)$	1
+rebuild:018	math	gpt-4o-mini	1240	What is 3 + 2? Choices: A. 5 B. 3 C. 8 D. 6 Answer:	A	A. 5	^(?:A\.?|A\.\s*5|5)$	1
+rebuild:019	math	gpt-4o-mini	1950	What is 3 + 8? Choices: A. 13 B. 12 C. 14 D. 11 Answer:	A	D. 11	^(?:D\.?|D\.\s*11|11)$	0
+rebuild:020	math	gpt-4o-mini	924	What is 2 + 3? Choices: A. 9 B. 8 C. 5 D. 4 Answer:	5	C. 5	^(?:C\.?|C\.\s*5|5)$	1
