@@ -26,24 +26,24 @@
 
  | run | id | category | question | model_answer | answer_regex | 
  | --- | --- | --- | --- | --- | --- | 
- | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434 | q19 | lang | Thank you. | Thank you. | ^(thank\s*you|thanks)$ | 
- | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434 | q7 | knowledge | Yes. | Yes. | ^(Yes | yes)$ | 
+ | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434 | q19 | lang | Thank you. | Thank you. | ^(thank\s*you\|thanks)$ | 
+ | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434 | q7 | knowledge | Yes. | Yes. | ^(Yes\|yes)$ | 
  | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434 | q18 | devops | `docker ps` | `docker ps` | ^docker\s+ps$ | 
- | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434 | q11 | logic | Yes. | Yes. | ^(Yes | yes)$ | 
+ | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434 | q11 | logic | Yes. | Yes. | ^(Yes\|yes)$ | 
  | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425 | q18 | devops | `docker ps` | `docker ps` | ^docker\s+ps$ | 
- | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425 | q11 | logic | Yes. | Yes. | ^(Yes | yes)$ | 
+ | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425 | q11 | logic | Yes. | Yes. | ^(Yes\|yes)$ | 
  | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425 | q17 | devops | `git rev-parse --short HEAD` | `git rev-parse --short HEAD` | ^git\s+rev-parse\s+--short\s+HEAD$ | 
- | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425 | q19 | lang | Thank you. | Thank you. | ^(thank\s*you|thanks)$ | 
- | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425 | q7 | knowledge | Yes. | Yes. | ^(Yes | yes)$ | 
- | /home/iwatsuka/evalbench/runs/20251014_112434 | q19 | lang | Thank you. | Thank you. | ^(thank\s*you|thanks)$ | 
- | /home/iwatsuka/evalbench/runs/20251014_112434 | q7 | knowledge | Yes. | Yes. | ^(Yes | yes)$ | 
+ | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425 | q19 | lang | Thank you. | Thank you. | ^(thank\s*you\|thanks)$ | 
+ | /home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425 | q7 | knowledge | Yes. | Yes. | ^(Yes\|yes)$ | 
+ | /home/iwatsuka/evalbench/runs/20251014_112434 | q19 | lang | Thank you. | Thank you. | ^(thank\s*you\|thanks)$ | 
+ | /home/iwatsuka/evalbench/runs/20251014_112434 | q7 | knowledge | Yes. | Yes. | ^(Yes\|yes)$ | 
  | /home/iwatsuka/evalbench/runs/20251014_112434 | q18 | devops | `docker ps` | `docker ps` | ^docker\s+ps$ | 
- | /home/iwatsuka/evalbench/runs/20251014_112434 | q11 | logic | Yes. | Yes. | ^(Yes | yes)$ | 
+ | /home/iwatsuka/evalbench/runs/20251014_112434 | q11 | logic | Yes. | Yes. | ^(Yes\|yes)$ | 
  | /home/iwatsuka/evalbench/runs/20251014_113425 | q18 | devops | `docker ps` | `docker ps` | ^docker\s+ps$ | 
- | /home/iwatsuka/evalbench/runs/20251014_113425 | q11 | logic | Yes. | Yes. | ^(Yes | yes)$ | 
+ | /home/iwatsuka/evalbench/runs/20251014_113425 | q11 | logic | Yes. | Yes. | ^(Yes\|yes)$ | 
  | /home/iwatsuka/evalbench/runs/20251014_113425 | q17 | devops | `git rev-parse --short HEAD` | `git rev-parse --short HEAD` | ^git\s+rev-parse\s+--short\s+HEAD$ | 
- | /home/iwatsuka/evalbench/runs/20251014_113425 | q19 | lang | Thank you. | Thank you. | ^(thank\s*you|thanks)$ | 
- | /home/iwatsuka/evalbench/runs/20251014_113425 | q7 | knowledge | Yes. | Yes. | ^(Yes | yes)$ | 
+ | /home/iwatsuka/evalbench/runs/20251014_113425 | q19 | lang | Thank you. | Thank you. | ^(thank\s*you\|thanks)$ | 
+ | /home/iwatsuka/evalbench/runs/20251014_113425 | q7 | knowledge | Yes. | Yes. | ^(Yes\|yes)$ | 
 
 ## Artifacts
 - Combined TSV: `reports/20251014_135654/all_results.tsv`
