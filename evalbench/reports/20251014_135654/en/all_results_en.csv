@@ -1,0 +1,81 @@
+run	id	category	question	answer_regex	model	answer	prompt_tokens	completion_tokens	correct
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q1,math,6,^6$,gpt-4o-mini,6,41,1,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q17,devops,`git rev-parse --short HEAD`,^git\s+rev-parse\s+--short\s+HEAD$,gpt-4o-mini,``` git rev-parse --short HEAD ```,46,11,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q19,lang,Thank you.,^(thank\s*you|thanks)$,gpt-4o-mini,Thank you.,36,3,0
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q7,knowledge,Yes.,^(yes)$,gpt-4o-mini,Yes.,40,2,0
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q5,coding,date +%s,^date\s+\+%s$,gpt-4o-mini,date +%s,46,4,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q13,knowledge,Paris,^(Paris)$,gpt-4o-mini,Paris,35,2,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q20,coding,`ls -1 | wc -l`,(ls\s+-1\s*\|\s*wc\s+-l|find\s+\.\s+-maxdepth\s+1(\s+[^|]+)?\|\s*wc\s+-l),gpt-4o-mini,`ls -1 | wc -l`,51,9,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q18,devops,`docker ps`,^docker\s+ps$,gpt-4o-mini,`docker ps`,42,4,0
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q3,knowledge,Kenji Miyazawa,Kenji\s*Miyazawa,gpt-4o-mini,Kenji Miyazawa,39,6,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q6,math,4,^4$,gpt-4o-mini,4,32,1,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q15,coding,jq .,^\s*jq\s+\.\s*$,gpt-4o-mini,jq .,44,2,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q2,math,31,^31$,gpt-4o-mini,31,39,1,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q16,math,3.14,^3\.14$,gpt-4o-mini,3.14,46,3,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q8,knowledge,H₂O,^((H\s*2\s*O)|H₂O)$,gpt-4o-mini,H₂O,35,3,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q10,knowledge,JPY,(JPY),gpt-4o-mini,JPY,36,2,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q14,math,5040,^5040$,gpt-4o-mini,5040,33,2,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q9,math,9,^9$,gpt-4o-mini,9,33,1,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q12,coding,Not Found,^Not\s*Found$,gpt-4o-mini,Not Found,36,2,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q4,knowledge,Ottawa,Ottawa,gpt-4o-mini,Ottawa,35,3,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_112434,q11,logic,Yes.,^(yes)$,gpt-4o-mini,Yes.,36,2,0
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q2,math,31,^31$,gpt-4o-mini,31,39,1,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q18,devops,`docker ps`,^docker\s+ps$,gpt-4o-mini,`docker ps`,42,4,0
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q10,knowledge,JPY,(JPY),gpt-4o-mini,JPY,36,2,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q13,knowledge,Paris,^(Paris)$,gpt-4o-mini,Paris,35,2,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q9,math,9,^9$,gpt-4o-mini,9,33,1,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q20,coding,`ls -1 | wc -l`,(ls\s+-1\s*\|\s*wc\s+-l|find\s+\.\s+-maxdepth\s+1(\s+[^|]+)?\|\s*wc\s+-l),gpt-4o-mini,`ls -1 | wc -l`,51,9,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q11,logic,Yes.,^(yes)$,gpt-4o-mini,Yes.,36,2,0
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q6,math,4,^4$,gpt-4o-mini,4,32,1,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q4,knowledge,Ottawa,Ottawa,gpt-4o-mini,Ottawa,35,3,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q14,math,5040,^5040$,gpt-4o-mini,5040,33,2,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q16,math,3.14,^3\.14$,gpt-4o-mini,3.14,46,3,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q17,devops,`git rev-parse --short HEAD`,^git\s+rev-parse\s+--short\s+HEAD$,gpt-4o-mini,`git rev-parse --short HEAD`,46,9,0
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q1,math,6,^6$,gpt-4o-mini,6,41,1,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q19,lang,Thank you.,^(thank\s*you|thanks)$,gpt-4o-mini,Thank you.,36,3,0
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q3,knowledge,Kenji Miyazawa,Kenji\s*Miyazawa,gpt-4o-mini,Kenji Miyazawa,39,6,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q8,knowledge,H₂O,^((H\s*2\s*O)|H₂O)$,gpt-4o-mini,H₂O,35,3,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q5,coding,date +%s,^date\s+\+%s$,gpt-4o-mini,date +%s,46,4,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q12,coding,Not Found.,^Not\s*Found$,gpt-4o-mini,Not Found,36,2,1
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q7,knowledge,Yes.,^(yes)$,gpt-4o-mini,Yes.,40,2,0
+/home/iwatsuka/dev/logicbench_env/logicbench-eval/runs/20251014_113425,q15,coding,jq .,^\s*jq\s+\.\s*$,gpt-4o-mini,jq .,44,2,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q1,math,6,^6$,gpt-4o-mini,6,41,1,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q17,devops,`git rev-parse --short HEAD`,^git\s+rev-parse\s+--short\s+HEAD$,gpt-4o-mini,``` git rev-parse --short HEAD ```,46,11,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q19,lang,Thank you.,^(thank\s*you|thanks)$,gpt-4o-mini,Thank you.,36,3,0
+/home/iwatsuka/evalbench/runs/20251014_112434,q7,knowledge,Yes.,^(yes)$,gpt-4o-mini,Yes.,40,2,0
+/home/iwatsuka/evalbench/runs/20251014_112434,q5,coding,date +%s,^date\s+\+%s$,gpt-4o-mini,date +%s,46,4,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q13,knowledge,Paris,^(Paris)$,gpt-4o-mini,Paris,35,2,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q20,coding,`ls -1 | wc -l`,(ls\s+-1\s*\|\s*wc\s+-l|find\s+\.\s+-maxdepth\s+1(\s+[^|]+)?\|\s*wc\s+-l),gpt-4o-mini,`ls -1 | wc -l`,51,9,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q18,devops,`docker ps`,^docker\s+ps$,gpt-4o-mini,`docker ps`,42,4,0
+/home/iwatsuka/evalbench/runs/20251014_112434,q3,knowledge,Kenji Miyazawa,Kenji\s*Miyazawa,gpt-4o-mini,Kenji Miyazawa,39,6,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q6,math,4,^4$,gpt-4o-mini,4,32,1,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q15,coding,jq .,^\s*jq\s+\.\s*$,gpt-4o-mini,jq .,44,2,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q2,math,31,^31$,gpt-4o-mini,31,39,1,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q16,math,3.14,^3\.14$,gpt-4o-mini,3.14,46,3,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q8,knowledge,H₂O,^((H\s*2\s*O)|H₂O)$,gpt-4o-mini,H₂O,35,3,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q10,knowledge,JPY,(JPY),gpt-4o-mini,JPY,36,2,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q14,math,5040,^5040$,gpt-4o-mini,5040,33,2,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q9,math,9,^9$,gpt-4o-mini,9,33,1,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q12,coding,Not Found,^Not\s*Found$,gpt-4o-mini,Not Found,36,2,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q4,knowledge,Ottawa,Ottawa,gpt-4o-mini,Ottawa,35,3,1
+/home/iwatsuka/evalbench/runs/20251014_112434,q11,logic,Yes.,^(yes)$,gpt-4o-mini,Yes.,36,2,0
+/home/iwatsuka/evalbench/runs/20251014_113425,q2,math,31,^31$,gpt-4o-mini,31,39,1,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q18,devops,`docker ps`,^docker\s+ps$,gpt-4o-mini,`docker ps`,42,4,0
+/home/iwatsuka/evalbench/runs/20251014_113425,q10,knowledge,JPY,(JPY),gpt-4o-mini,JPY,36,2,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q13,knowledge,Paris,^(Paris)$,gpt-4o-mini,Paris,35,2,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q9,math,9,^9$,gpt-4o-mini,9,33,1,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q20,coding,`ls -1 | wc -l`,(ls\s+-1\s*\|\s*wc\s+-l|find\s+\.\s+-maxdepth\s+1(\s+[^|]+)?\|\s*wc\s+-l),gpt-4o-mini,`ls -1 | wc -l`,51,9,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q11,logic,Yes.,^(yes)$,gpt-4o-mini,Yes.,36,2,0
+/home/iwatsuka/evalbench/runs/20251014_113425,q6,math,4,^4$,gpt-4o-mini,4,32,1,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q4,knowledge,Ottawa,Ottawa,gpt-4o-mini,Ottawa,35,3,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q14,math,5040,^5040$,gpt-4o-mini,5040,33,2,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q16,math,3.14,^3\.14$,gpt-4o-mini,3.14,46,3,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q17,devops,`git rev-parse --short HEAD`,^git\s+rev-parse\s+--short\s+HEAD$,gpt-4o-mini,`git rev-parse --short HEAD`,46,9,0
+/home/iwatsuka/evalbench/runs/20251014_113425,q1,math,6,^6$,gpt-4o-mini,6,41,1,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q19,lang,Thank you.,^(thank\s*you|thanks)$,gpt-4o-mini,Thank you.,36,3,0
+/home/iwatsuka/evalbench/runs/20251014_113425,q3,knowledge,Kenji Miyazawa,Kenji\s*Miyazawa,gpt-4o-mini,Kenji Miyazawa,39,6,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q8,knowledge,H2O,^((H\s*2\s*O)|H₂O)$,gpt-4o-mini,H₂O,35,3,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q5,coding,date +%s,^date\s+\+%s$,gpt-4o-mini,date +%s,46,4,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q12,coding,Not Found,^Not\s*Found$,gpt-4o-mini,Not Found,36,2,1
+/home/iwatsuka/evalbench/runs/20251014_113425,q7,knowledge,Yes.,^(yes)$,gpt-4o-mini,Yes.,40,2,0
+/home/iwatsuka/evalbench/runs/20251014_113425,q15,coding,jq .,^\s*jq\s+\.\s*$,gpt-4o-mini,jq .,44,2,1
