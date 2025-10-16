@@ -43,3 +43,12 @@ data/logicbench_src/
 
 # allow tracking of top-level reports
 !reports/**
+# LogicBench local artifacts
+runs/
+dist/
+data/dev_20*.jsonl
+data/*tmp*.jsonl
+*.tmp.jsonl
+__pycache__/
+*.pyc
+reports/summary_*.csv
