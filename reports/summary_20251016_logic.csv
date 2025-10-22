@@ -1,0 +1,3 @@
+id,category,gold,pred,correct,cost_usd
+logic_001,unknown,A,A,1,0.000000
+logic_002,unknown,B,B,1,0.000000

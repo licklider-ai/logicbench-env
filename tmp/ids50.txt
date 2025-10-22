@@ -1,0 +1,10 @@
+devops_001
+devops_001_dup
+devops_002
+devops_002_dup
+kn_001
+kn_001_dup
+kn_002
+kn_002_dup
+logic_001
+logic_002

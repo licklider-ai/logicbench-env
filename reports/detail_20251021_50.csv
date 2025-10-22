@@ -1,0 +1,11 @@
+id,gold,pred,correct
+devops_001,C,C,1
+devops_001_dup,C,C,1
+devops_002,A,A,1
+devops_002_dup,A,A,1
+kn_001,B,B,1
+kn_001_dup,B,B,1
+kn_002,B,B,1
+kn_002_dup,B,B,1
+logic_001,A,A,1
+logic_002,B,B,1
