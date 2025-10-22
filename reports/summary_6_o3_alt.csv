@@ -1,0 +1,10 @@
+Total,6
+Correct,3
+Accuracy,0.500
+id,gold,pred,correct
+devops_001,C,A,0
+devops_002,A,A,1
+kn_001,B,B,1
+kn_002,B,A,0
+logic_001,A,A,1
+logic_002,B,A,0

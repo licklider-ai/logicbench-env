@@ -1,0 +1,2 @@
+{"id": "devops_001", "stem": "Which Git command lists untracked files only?", "choices": ["git status -s", "git diff --name-only", "git ls-files --others --exclude-standard", "git ls-files --deleted"], "options": {"A": "git status -s", "B": "git diff --name-only", "C": "git ls-files --others --exclude-standard", "D": "git ls-files --deleted"}}
+{"id": "devops_002", "note": "Single-command expected", "stem": "Print only running systemd services as names, one per line.", "choices": [], "options": {}}

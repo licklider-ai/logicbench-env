@@ -1,0 +1,7 @@
+id,category,gold,pred,correct,cost_usd
+kn_001,unknown,B,B,1,0.000000
+kn_002,unknown,B,B,1,0.000000
+logic_001,unknown,A,B,0,0.000000
+logic_002,unknown,B,B,1,0.000000
+devops_001,unknown,C,C,1,0.000000
+devops_002,unknown,A,A,1,0.000000
