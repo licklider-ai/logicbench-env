@@ -21,3 +21,11 @@
 *.json text eol=lf
 *.jsonl text eol=lf
 *.md   text eol=lf
+# すべてテキストは自動で正規化
+* text=auto
+
+# CSV/JSON/JSONL/MD は LF に固定
+*.csv  text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.md   text eol=lf
