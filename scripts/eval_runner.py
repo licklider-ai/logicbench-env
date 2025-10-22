@@ -3,6 +3,8 @@ from pathlib import Path
 from typing import Dict, Any, List, Tuple, Optional
 from openai import OpenAI
 
+MODEL = os.getenv("MODEL", "gpt-4o-mini")
+
 MODEL   = os.getenv("LB_MODEL", "gpt-4o-mini")
 IN_PATH = os.getenv("LB_DEV_PATH", "data/dev_20.jsonl")
 RAW_OUT = os.getenv("LB_OUT_RAW", "runs/pred_raw.jsonl")
