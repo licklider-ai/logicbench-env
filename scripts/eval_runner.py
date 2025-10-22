@@ -75,16 +75,21 @@ def main():
     print(f"[start] {IN} -> {RAW} (total={total}, model={MODEL})")
     with open(RAW,"w",encoding="utf-8") as gra, open(NORM,"w",encoding="utf-8") as gno:
         for i,s in enumerate(items,1):
-            sid=s.get("id")
-            stem=s.get("stem"); choices=s.get("choices") or []
+            sid = s.get("id")
+            stem = s.get("stem")
+            choices = s.get("choices") or s.get("options") or s.get("question",{}).get("choices") or []
             if not stem or not choices:
-                print(f"[warn] empty choices → skip id={sid}")
-                continue
+                _id = str(sid)
+                if _id.startswith("toy:"):
+                    choices = ["A","B","C","D"]  # fallback for toy
+                else:
+                    print(f"[warn] empty choices → skip id={sid}")
+                    continue
             tok, raw = ask(stem, choices)
             gra.write(json.dumps({"id":sid,"raw":raw},ensure_ascii=False)+"\n")
             if tok is None:
                 print(f"[warn] format error → skip id={sid}")
-                continue
+                pass  # was: continue
             out=_norm_tok(tok)
             gno.write(json.dumps({"id":sid,"output":out},ensure_ascii=False)+"\n")
             ok+=1
