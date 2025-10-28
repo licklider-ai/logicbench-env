@@ -1,8 +1,9 @@
 model,total,correct,accuracy,csv
 gpt-4o-mini,50,44,0.880,reports/summary_20251027_133322_gpt-4o-mini_dev50.csv
-gpt-4.1-mini,50,42,0.840,reports/summary_20251027_133322_gpt-4.1-mini_dev50.csv
-got-5,50,41,0.820,reports/summary_20251027_142459_got-5_dev50.csv
-o3-mini,50,41,0.820,reports/summary_20251027_134731_o3-mini_dev50.csv
-o3,50,41,0.820,reports/summary_20251027_140302_o3_dev50.csv
-gpt-4-32k,50,41,0.820,reports/summary_20251027_142459_gpt-4-32k_dev50.csv
-gpt-3.5-turbo,50,27,0.540,reports/summary_20251027_140302_gpt-3.5-turbo_dev50.csv
+gpt-4.1-mini,50,44,0.880,reports/summary_20251027_161855_gpt-4.1-mini_dev50.csv
+o3-mini,50,41,0.820,reports/summary_20251027_161855_o3-mini_dev50.csv
+o3,50,41,0.820,reports/summary_20251027_161855_o3_dev50.csv
+got-5,50,41,0.820,reports/summary_20251027_161855_got-5_dev50.csv
+gpt-4-32k,50,41,0.820,reports/summary_20251027_161855_gpt-4-32k_dev50.csv
+gpt-4o,50,41,0.820,reports/summary_20251028_094209_gpt-4o_dev50.csv
+gpt-3.5-turbo,50,29,0.580,reports/summary_20251027_161855_gpt-3.5-turbo_dev50.csv
