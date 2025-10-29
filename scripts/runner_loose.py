@@ -3,7 +3,7 @@ import os, sys, json, re
 from pathlib import Path
 
 # ===== Settings =====
-MODEL = os.getenv("LB_MODEL", "gpt-4o-mini")
+MODEL = os.environ["LB_MODEL"]
 SYSTEM_PROMPT = (
     "You are a careful solver. Consider all four options equally likely a priori. "
     "Read the question and options carefully and answer with EXACTLY ONE letter among {A,B,C,D}. "

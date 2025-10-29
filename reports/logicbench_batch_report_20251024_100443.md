@@ -1,0 +1,10 @@
+# LogicBench 50問 バッチ結果 (20251024_100443)
+
+## 対象
+- データ: `data/dev_50.eval.jsonl`
+- GOLD : `data/gold.jsonl`
+- モデル: gpt-4o-mini gpt-4.1-mini o3-mini
+
+## 出力物
+- 集約CSV: `reports/summary_20251024_100443_ALL.csv`
+- 各モデル個別: `reports/report_20251024_100443_<model>.md`
