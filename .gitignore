@@ -52,3 +52,9 @@ data/*tmp*.jsonl
 __pycache__/
 *.pyc
 reports/summary_*.csv
+
+# local junk
+$\{BRIDGE\}
+B
+C
+D
