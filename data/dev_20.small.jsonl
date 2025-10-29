@@ -1,0 +1,10 @@
+{"id":"kn_001","prompt":"Which planet has the largest number of known moons?","choices":["Earth","Jupiter","Mars","Venus"]}
+{"id":"kn_002","prompt":"Who wrote 'Pride and Prejudice'?","choices":["Emily Brontë","Jane Austen","Mary Shelley","Charles Dickens"]}
+{"id":"devops_002_dup","prompt":"Which pipeline prints only running systemd service unit names, one per line?","choices":["systemctl list-units --type=service --state=running --no-legend --plain | awk '{printf \"%s\\n\", $1}'","systemctl status --running --no-pager | awk '{print $1}'","systemctl list-unit-files --state=enabled --no-legend | awk '{print $1}'","systemctl list-units --type=service --all --no-legend | awk '{print $1}'"]}
+{"id":"devops_001","prompt":"Which Git command lists untracked files only (respecting .gitignore)?","choices":["git status -s","git diff --name-only","git ls-files --others --exclude-standard","git ls-files --deleted"]}
+{"id":"devops_002","prompt":"Which pipeline prints only running systemd service unit names, one per line?","choices":["systemctl list-units --type=service --state=running --no-legend --plain | awk '{printf \"%s\\n\", $1}'","systemctl status --running --no-pager | awk '{print $1}'","systemctl list-unit-files --state=enabled --no-legend | awk '{print $1}'","systemctl list-units --type=service --all --no-legend | awk '{print $1}'"]}
+{"id":"rebuild:010","prompt":"What is 5 + 3?\n\nChoices:\nA. 7\nB. 9\nC. 11\nD. 8\n\nAnswer:","choices":["7","9","11","8"]}
+{"id":"rebuild:011","prompt":"What is 7 + 4?\n\nChoices:\nA. 10\nB. 9\nC. 11\nD. 14\n\nAnswer:","choices":["10","9","11","14"]}
+{"id":"rebuild:012","prompt":"What is 6 + 3?\n\nChoices:\nA. 11\nB. 9\nC. 12\nD. 7\n\nAnswer:","choices":["11","9","12","7"]}
+{"id":"rebuild:013","prompt":"What is 4 + 9?\n\nChoices:\nA. 12\nB. 16\nC. 18\nD. 13\n\nAnswer:","choices":["12","16","18","13"]}
+{"id":"rebuild:014","prompt":"What is 5 + 7?\n\nChoices:\nA. 12\nB. 10\nC. 16\nD. 9\n\nAnswer:","choices":["12","10","16","9"]}

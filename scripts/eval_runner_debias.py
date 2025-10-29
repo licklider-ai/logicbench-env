@@ -147,7 +147,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("infile")
     ap.add_argument("outfile")
-    ap.add_argument("--model", default=os.environ.get("LB_MODEL","gpt-4o-mini"))
+    ap.add_argument("--model", default=os.environ.get("LB_MODEL"))
     ap.add_argument("--temp", type=float, default=float(os.environ.get("LB_TEMP","0.0")))
     ap.add_argument("--tries", type=int, default=int(os.environ.get("LB_TRIES","3")))
     ap.add_argument("--sleep", type=float, default=float(os.environ.get("LB_SLEEP","0.0")))

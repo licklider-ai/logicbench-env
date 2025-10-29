@@ -1,0 +1,62 @@
+
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import sys, json, os
+
+PROMPT_KEYS = ("prompt","question","input","stem","question_text","q","text")
+
+def get_prompt(sample: dict):
+    for k in PROMPT_KEYS:
+        v = sample.get(k)
+        if v: return str(v)
+    return None
+
+def get_choices(sample: dict):
+    ch = sample.get("choices")
+    if isinstance(ch, list) and len(ch) >= 2:
+        return [str(x) for x in ch]
+    opt = sample.get("options")
+    if isinstance(opt, dict):
+        arr = [opt.get(k) for k in ("A","B","C","D") if opt.get(k) is not None]
+        if len(arr) >= 2:
+            return [str(x) for x in arr]
+    return None
+
+def main():
+    if len(sys.argv) < 3:
+        print("usage: eval_runner.py <in.jsonl> <out.jsonl>", file=sys.stderr)
+        sys.exit(2)
+
+    in_path, out_path = sys.argv[1], sys.argv[2]
+    total = accepted = skipped = 0
+    tmp_path = out_path + ".tmp"
+
+    with open(tmp_path, "w", encoding="utf-8") as w:
+        with open(in_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                total += 1
+                try:
+                    sample = json.loads(line)
+                except Exception:
+                    skipped += 1
+                    continue
+                sid = sample.get("id", "?")
+                prompt = get_prompt(sample)
+                choices = get_choices(sample)
+                if not prompt or not choices:
+                    skipped += 1
+                    continue
+                out = choices[0]  # フォールバック
+                w.write(json.dumps({"id": sid, "output": out}, ensure_ascii=False) + "\n")
+                accepted += 1
+        if accepted == 0:
+            w.write(json.dumps({"id": "_heartbeat", "output": ""}, ensure_ascii=False) + "\n")
+
+    os.replace(tmp_path, out_path)
+    print(f"[safe-runner] total={total} accepted={accepted} skipped={skipped}")
+
+if __name__ == "__main__":
+    main()

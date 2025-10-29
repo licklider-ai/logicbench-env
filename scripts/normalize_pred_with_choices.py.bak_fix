@@ -1,0 +1,150 @@
+import json, re, sys, pathlib
+
+USAGE = "usage: python normalize_pred_with_choices.py <pred_norm.jsonl> <dataset.strict.jsonl> <out.jsonl>"
+
+def read_jsonl(path):
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line=line.strip()
+            if not line: continue
+            try: yield json.loads(line)
+            except: pass
+
+# -------- choices 抽出まわり --------
+MCQ_INLINE = re.compile(
+    r'(?is)\b([A-D])\s*[\.\)\]:\-]\s*(.+?)(?=(?:\b[A-D]\s*[\.\)\]:\-]\s*)|$)'
+)
+
+def norm_text(s: str):
+    s = (s or "").strip().lower()
+    s = re.sub(r'\s+', ' ', s)
+    s = re.sub(r'[\"\'`]+', '', s)
+    s = re.sub(r'[.,;:!?()\[\]]', '', s)
+    return s
+
+def choices_from_text(text: str):
+    """行内/行頭の A-D を抜く（横並び/縦並びどちらも対応）"""
+    if not isinstance(text, str): return {}
+    out = {}
+    for m in MCQ_INLINE.finditer(text):
+        L = m.group(1).upper()
+        body = m.group(2).strip()
+        if L not in out:
+            out[L] = body
+    return {k: out[k] for k in ['A','B','C','D'] if k in out}
+
+def choices_from_obj(obj: dict):
+    """
+    dataset 1行から選択肢辞書 {'A': '...', 'B': '...', 'C': '...', 'D': '...'} を作る。
+    - options: 配列/辞書
+    - choices: 配列/辞書
+    - input/question/prompt/text: テキストから抽出
+    """
+    # options: ["..","..","..",".."] or dict
+    opts = obj.get("options")
+    if isinstance(opts, list) and len(opts) >= 4:
+        return {k:v for k,v in zip(['A','B','C','D'], opts[:4])}
+    if isinstance(opts, dict):
+        got = {k.upper(): v for k,v in opts.items() if k and k.upper() in "ABCD"}
+        if got:
+            return {k: got[k] for k in ['A','B','C','D'] if k in got}
+
+    # choices: ["..","..","..",".."] or dict
+    ch = obj.get("choices")
+    if isinstance(ch, list) and len(ch) >= 4:
+        return {k:v for k,v in zip(['A','B','C','D'], ch[:4])}
+    if isinstance(ch, dict):
+        got = {k.upper(): v for k,v in ch.items() if k and k.upper() in "ABCD"}
+        if got:
+            return {k: got[k] for k in ['A','B','C','D'] if k in got}
+
+    # テキストから抽出
+    for key in ("input","question","prompt","text"):
+        t = obj.get(key)
+        if isinstance(t, str):
+            found = choices_from_text(t)
+            if found: return found
+    return {}
+
+# -------- pred からのトークン取り出し --------
+def extract_token_from_pred(o: dict):
+    fields = ['label','pred','answer','final','output','text','response']
+    vals = [o[k] for k in fields if isinstance(o.get(k), str)]
+    blob = "\n".join(vals).strip()
+
+    m = re.search(r'(?i)\b(?:final\s+answer|answer)\s*[:：]\s*([A-D]|YES|NO|TRUE|FALSE|-?\d+)\b', blob)
+    if m:
+        tok = m.group(1).upper()
+        if tok == "TRUE": tok = "YES"
+        if tok == "FALSE": tok = "NO"
+        return tok, blob
+
+    last = (blob.splitlines()[-1].strip() if blob else "")
+    for pat in [r'^([A-D])\.?$', r'\b(YES|NO|TRUE|FALSE)\b', r'(-?\d+)\b']:
+        m = re.search(pat, last, re.I)
+        if m:
+            tok = m.group(1).upper()
+            if tok == "TRUE": tok = "YES"
+            if tok == "FALSE": tok = "NO"
+            return tok, blob
+
+    # 直接 A-D などが無ければ None
+    return None, blob
+
+def main():
+    if len(sys.argv) != 4:
+        print(USAGE, file=sys.stderr); sys.exit(2)
+    pred_p, data_p, out_p = map(pathlib.Path, sys.argv[1:])
+
+    # dataset: id -> {A: "...", B: "...", ...}
+    id2choices = {}
+    for r in read_jsonl(str(data_p)):
+        _id = r.get("id")
+        if _id is None: continue
+        ch = choices_from_obj(r)
+        if ch: id2choices[str(_id)] = ch
+
+    total_in = total_out = 0
+    with open(out_p, "w", encoding="utf-8") as fo:
+        for o in read_jsonl(str(pred_p)):
+            total_in += 1
+            _id = str(o.get("id"))
+            ch  = id2choices.get(_id, {})
+            label = None
+
+            tok, blob = extract_token_from_pred(o)
+
+            # 1) 既に A-D/YES/NO/数値ならそのまま
+            if isinstance(tok, str) and re.fullmatch(r'[A-D]|YES|NO|-?\d+', tok, re.I):
+                label = tok.upper()
+            else:
+                # 2) 本文（Earth など）が選択肢本文に一致/含有するなら A-D に寄せる
+                base = norm_text(blob)
+                # 完全一致→含有→逆含有
+                for L, body in ch.items():
+                    if norm_text(body) == base: label = L; break
+                if label is None:
+                    for L, body in ch.items():
+                        nb = norm_text(body)
+                        if nb and nb in base: label = L; break
+                if label is None:
+                    for L, body in ch.items():
+                        nb = norm_text(body)
+                        if base and base in nb: label = L; break
+
+            out = dict(o)
+            out["label"] = label
+            fo.write(json.dumps(out, ensure_ascii=False) + "\n")
+            if label is not None: total_out += 1
+
+    spec = {"type":"letters","letters":["A","B","C","D"]}
+    print(f"[OK] choices-aware normalized {total_out}/{total_in} -> {out_p} spec={spec}")
+    try:
+        with open(out_p, encoding="utf-8") as f:
+            for i, line in enumerate(f):
+                if i==0:
+                    print(line.strip()); break
+    except: pass
+
+if __name__ == "__main__":
+    main()

@@ -1,50 +1,20 @@
-{"id": "devops_001", "raw": "C"}
-{"id": "devops_002", "raw": "A"}
-{"id": "kn_001", "raw": "B"}
-{"id": "kn_002", "raw": "B"}
-{"id": "logic_001", "raw": "A"}
-{"id": "logic_002", "raw": "B"}
-{"id": "rebuild:001", "raw": "C"}
-{"id": "rebuild:002", "raw": "D"}
-{"id": "rebuild:003", "raw": "B"}
-{"id": "rebuild:004", "raw": "A"}
-{"id": "rebuild:005", "raw": "D"}
-{"id": "rebuild:006", "raw": "B"}
-{"id": "rebuild:007", "raw": "A"}
-{"id": "rebuild:008", "raw": "A"}
-{"id": "rebuild:009", "raw": "B"}
-{"id": "rebuild:010", "raw": "D"}
-{"id": "rebuild:011", "raw": "C"}
-{"id": "rebuild:012", "raw": "A"}
-{"id": "rebuild:013", "raw": "D"}
-{"id": "rebuild:014", "raw": "A"}
-{"id": "rebuild:015", "raw": "D"}
-{"id": "rebuild:016", "raw": "A"}
-{"id": "rebuild:017", "raw": "D"}
-{"id": "rebuild:018", "raw": "A"}
-{"id": "rebuild:019", "raw": "A"}
-{"id": "rebuild:020", "raw": "C"}
-{"id": "toy:q_no_00", "raw": "A"}
-{"id": "toy:q_no_01", "raw": "A"}
-{"id": "toy:q_no_02", "raw": "A"}
-{"id": "toy:q_no_03", "raw": "A"}
-{"id": "toy:q_no_04", "raw": "A"}
-{"id": "toy:q_no_05", "raw": "A"}
-{"id": "toy:q_no_06", "raw": "A"}
-{"id": "toy:q_no_07", "raw": "A"}
-{"id": "toy:q_no_08", "raw": "A"}
-{"id": "toy:q_no_09", "raw": "A"}
-{"id": "toy:q_yes_00", "raw": "A"}
-{"id": "toy:q_yes_01", "raw": "A"}
-{"id": "toy:q_yes_02", "raw": "A"}
-{"id": "toy:q_yes_03", "raw": "A"}
-{"id": "toy:q_yes_04", "raw": "A"}
-{"id": "toy:q_yes_05", "raw": "A"}
-{"id": "toy:q_yes_06", "raw": "A"}
-{"id": "toy:q_yes_07", "raw": "A"}
-{"id": "toy:q_yes_08", "raw": "A"}
-{"id": "toy:q_yes_09", "raw": "A"}
-{"id": "devops_001_dup", "raw": "C"}
-{"id": "devops_002_dup", "raw": "A"}
-{"id": "kn_001_dup", "raw": "B"}
-{"id": "kn_002_dup", "raw": "B"}
+{"id": "toy:q_no_00", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_no_01", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_no_02", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_no_03", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_no_04", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_no_05", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_no_06", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_no_07", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_no_08", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_no_09", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_yes_00", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_yes_01", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_yes_02", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_yes_03", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_yes_04", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_yes_05", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_yes_06", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_yes_07", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_yes_08", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}
+{"id": "toy:q_yes_09", "raw": "[chat.error 'ascii' codec can't encode characters in position 7-13: ordinal not in range(128)]"}

@@ -1,0 +1,135 @@
+import json, re, sys, pathlib
+
+USAGE = "usage: python normalize_pred_with_choices.py <pred_norm.jsonl> <dataset.strict.jsonl> <out.jsonl>"
+
+def read_jsonl(path):
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line=line.strip()
+            if not line: continue
+            try: yield json.loads(line)
+            except: pass
+
+# A-D を本文から抜く（縦/横並びどちらも拾う）
+MCQ_INLINE = re.compile(r'(?is)\b([A-D])\s*[\.\)\]:\-]\s*(.+?)(?=(?:\b[A-D]\s*[\.\)\]:\-]\s*)|$)')
+
+def choices_from_text_or_list(item):
+    """item から choices を {A: text, ...} で返す。配列/文字列どちらでもOK"""
+    # 1) choices フィールド（配列）を優先
+    arr = item.get("choices") or item.get("options")
+    if isinstance(arr, list) and len(arr) >= 2:
+        # 0→A, 1→B, ...
+        abc = "ABCD"
+        return {abc[i]: str(arr[i]).strip() for i in range(min(4, len(arr)))}
+    # 2) 入力テキストから抽出
+    for key in ("input","question","prompt","context"):
+        if isinstance(item.get(key), str):
+            txt = item[key]
+            out = {}
+            for m in MCQ_INLINE.finditer(txt):
+                L = m.group(1).upper()
+                body = m.group(2).strip()
+                if L in "ABCD" and L not in out:
+                    out[L] = body
+            if out:
+                return out
+    return {}
+
+def norm_text(s: str):
+    return re.sub(r'[\W_]+', '', (s or '').lower())
+
+def extract_token_from_pred(o):
+    """pred 1件からラベル候補を抽出（Answer: X / 最終行 / pred/answer/label）"""
+    fields = [o.get("label"), o.get("answer"), o.get("pred"), o.get("output"), o.get("text"), o.get("response")]
+    # 1) Answer: 優先
+    for f in fields:
+        if isinstance(f, str):
+            m = re.search(r'(?i)\b(?:final\s+answer|answer)\s*[:：]\s*([A-D]|YES|NO|TRUE|FALSE|-?\d+)\b', f)
+            if m:
+                tok = m.group(1).upper()
+                if tok == "TRUE": tok = "YES"
+                if tok == "FALSE": tok = "NO"
+                return tok
+    # 2) "option/choice X" っぽい言及
+    for f in fields:
+        if isinstance(f, str):
+            m = re.search(r'(?i)\b(?:option|choice)\s*([A-D1-4])\b', f)
+            if m:
+                return m.group(1).upper()
+    # 3) 単独の A–D / YES/NO / 数値
+    for f in fields:
+        if isinstance(f, str):
+            last = f.strip().splitlines()[-1].strip()
+            for pat in [r'^([A-D])\.?$', r'\b(YES|NO|TRUE|FALSE)\b', r'(-?\d+)\b']:
+                m = re.search(pat, last, re.I)
+                if m:
+                    tok = m.group(1).upper()
+                    if tok == "TRUE": tok = "YES"
+                    if tok == "FALSE": tok = "NO"
+                    return tok
+    return None
+
+def map_number_to_letter(tok):
+    m = re.fullmatch(r'[1-4]', str(tok or '').strip())
+    if not m: return None
+    return "ABCD"[int(tok)-1]
+
+def main():
+    if len(sys.argv) != 4:
+        print(USAGE, file=sys.stderr); sys.exit(2)
+    pred_path, dataset_path, out_path = sys.argv[1:4]
+
+    # dataset から id→choices(A-D) を構築
+    id2choices = {}
+    for item in read_jsonl(dataset_path):
+        i = item.get("id")
+        if i is None: continue
+        ch = choices_from_text_or_list(item)
+        if ch: id2choices[str(i)] = ch
+
+    total_in = total_out = 0
+    with open(out_path, "w", encoding="utf-8") as fo:
+        for o in read_jsonl(pred_path):
+            total_in += 1
+            i = o.get("id")
+            if i is None:
+                continue
+
+            ch = id2choices.get(str(i), {})
+            # 逆引き辞書（選択肢テキスト→A-D）
+            rev = {norm_text(v): k for k, v in ch.items()}
+
+            tok = extract_token_from_pred(o)
+
+            # ① 数字 1-4 を A-D に
+            if tok and re.fullmatch(r'[1-4]', tok):
+                tok = map_number_to_letter(tok)
+
+            # ② テキスト一致で A-D に（出力が "Earth" など）
+            if tok and tok not in ("A","B","C","D","YES","NO"):
+                key = norm_text(tok)
+                if key in rev:
+                    tok = rev[key]
+
+            # ③ "option/choice X" で 1-4 の場合も A-D に（extract 内で拾っているが保険）
+            if tok and re.fullmatch(r'[1-4]', str(tok)):
+                tok = map_number_to_letter(tok)
+
+            # 書き出し：choices がある問題は A-D/YES/NO 以外は捨てる（未確定扱い）
+            out = dict(o)
+            if ch:
+                if tok in ("A","B","C","D","YES","NO"):
+                    out["label"] = tok
+                else:
+                    out["label"] = None
+            else:
+                # 非MCQはそのまま（数値なども許容）
+                out["label"] = tok
+
+            json.dump(out, fo, ensure_ascii=False)
+            fo.write("\n")
+            if out.get("label") is not None:
+                total_out += 1
+
+    spec = {"type":"letters","letters":["A","B","C","D"]}
+    print(f"[OK] choices-aware normalized {total_out}/{total_in} -> {out_path} spec={spec}")

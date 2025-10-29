@@ -1,0 +1,696 @@
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"devops_001\",", "input": "\"id\": \"devops_001\","}
+{"id": "\"stem\": \"Which Git command lists untracked files only (respecting .gitignore)?\",", "input": "\"stem\": \"Which Git command lists untracked files only (respecting .gitignore)?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"git status -s\",", "input": "\"git status -s\","}
+{"id": "\"git diff --name-only\",", "input": "\"git diff --name-only\","}
+{"id": "\"git ls-files --others --exclude-standard\",", "input": "\"git ls-files --others --exclude-standard\","}
+{"id": "git ls-files --deleted", "input": "git ls-files --deleted"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"devops_002\",", "input": "\"id\": \"devops_002\","}
+{"id": "\"stem\": \"Which pipeline prints only running systemd service unit names, one per line?\",", "input": "\"stem\": \"Which pipeline prints only running systemd service unit names, one per line?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"systemctl list-units --type=service --state=running --no-legend --plain | awk '{printf \\\"%s\\\\n\\\", $1}'\",", "input": "\"systemctl list-units --type=service --state=running --no-legend --plain | awk '{printf \\\"%s\\\\n\\\", $1}'\","}
+{"id": "\"systemctl status --running --no-pager | awk '{print $1}'\",", "input": "\"systemctl status --running --no-pager | awk '{print $1}'\","}
+{"id": "\"systemctl list-unit-files --state=enabled --no-legend | awk '{print $1}'\",", "input": "\"systemctl list-unit-files --state=enabled --no-legend | awk '{print $1}'\","}
+{"id": "systemctl list-units --type=service --all --no-legend | awk '{print $1}'", "input": "systemctl list-units --type=service --all --no-legend | awk '{print $1}'"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"kn_001\",", "input": "\"id\": \"kn_001\","}
+{"id": "\"stem\": \"Which planet has the largest number of known moons?\",", "input": "\"stem\": \"Which planet has the largest number of known moons?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"Earth\",", "input": "\"Earth\","}
+{"id": "\"Jupiter\",", "input": "\"Jupiter\","}
+{"id": "\"Mars\",", "input": "\"Mars\","}
+{"id": "Venus", "input": "Venus"}
+{"id": "],", "input": "],"}
+{"id": "\"options\": {", "input": "\"options\": {"}
+{"id": "\"A\": \"Earth\",", "input": "\"A\": \"Earth\","}
+{"id": "\"B\": \"Jupiter\",", "input": "\"B\": \"Jupiter\","}
+{"id": "\"C\": \"Mars\",", "input": "\"C\": \"Mars\","}
+{"id": "\"D\": \"Venus\"", "input": "\"D\": \"Venus\""}
+{"id": "}", "input": "}"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"kn_002\",", "input": "\"id\": \"kn_002\","}
+{"id": "\"stem\": \"Who wrote 'Pride and Prejudice'?\",", "input": "\"stem\": \"Who wrote 'Pride and Prejudice'?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"Emily Brontë\",", "input": "\"Emily Brontë\","}
+{"id": "\"Jane Austen\",", "input": "\"Jane Austen\","}
+{"id": "\"Mary Shelley\",", "input": "\"Mary Shelley\","}
+{"id": "Charles Dickens", "input": "Charles Dickens"}
+{"id": "],", "input": "],"}
+{"id": "\"options\": {", "input": "\"options\": {"}
+{"id": "\"A\": \"Emily Brontë\",", "input": "\"A\": \"Emily Brontë\","}
+{"id": "\"B\": \"Jane Austen\",", "input": "\"B\": \"Jane Austen\","}
+{"id": "\"C\": \"Mary Shelley\",", "input": "\"C\": \"Mary Shelley\","}
+{"id": "\"D\": \"Charles Dickens\"", "input": "\"D\": \"Charles Dickens\""}
+{"id": "}", "input": "}"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"logic_001\",", "input": "\"id\": \"logic_001\","}
+{"id": "\"stem\": \"A box contains 3 red, 2 blue, and 1 green ball. You draw two balls without replacement. What is the probability both are red?\",", "input": "\"stem\": \"A box contains 3 red, 2 blue, and 1 green ball. You draw two balls without replacement. What is the probability both are red?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"1/10\",", "input": "\"1/10\","}
+{"id": "\"1/5\",", "input": "\"1/5\","}
+{"id": "\"3/10\",", "input": "\"3/10\","}
+{"id": "1/3", "input": "1/3"}
+{"id": "],", "input": "],"}
+{"id": "\"options\": {", "input": "\"options\": {"}
+{"id": "\"A\": \"1/10\",", "input": "\"A\": \"1/10\","}
+{"id": "\"B\": \"1/5\",", "input": "\"B\": \"1/5\","}
+{"id": "\"C\": \"3/10\",", "input": "\"C\": \"3/10\","}
+{"id": "\"D\": \"1/3\"", "input": "\"D\": \"1/3\""}
+{"id": "}", "input": "}"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"logic_002\",", "input": "\"id\": \"logic_002\","}
+{"id": "\"stem\": \"If all Flargs are Snerbs and no Snerbs are Torks, which is true?\",", "input": "\"stem\": \"If all Flargs are Snerbs and no Snerbs are Torks, which is true?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"Some Flargs are Torks\",", "input": "\"Some Flargs are Torks\","}
+{"id": "\"No Flargs are Torks\",", "input": "\"No Flargs are Torks\","}
+{"id": "\"All Torks are Flargs\",", "input": "\"All Torks are Flargs\","}
+{"id": "Some Snerbs are Torks", "input": "Some Snerbs are Torks"}
+{"id": "],", "input": "],"}
+{"id": "\"options\": {", "input": "\"options\": {"}
+{"id": "\"A\": \"Some Flargs are Torks\",", "input": "\"A\": \"Some Flargs are Torks\","}
+{"id": "\"B\": \"No Flargs are Torks\",", "input": "\"B\": \"No Flargs are Torks\","}
+{"id": "\"C\": \"All Torks are Flargs\",", "input": "\"C\": \"All Torks are Flargs\","}
+{"id": "\"D\": \"Some Snerbs are Torks\"", "input": "\"D\": \"Some Snerbs are Torks\""}
+{"id": "}", "input": "}"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:001\",", "input": "\"id\": \"rebuild:001\","}
+{"id": "\"stem\": \"What is 3 + 2?\",", "input": "\"stem\": \"What is 3 + 2?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"3\",", "input": "\"3\","}
+{"id": "\"2\",", "input": "\"2\","}
+{"id": "\"5\",", "input": "\"5\","}
+{"id": "8", "input": "8"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 3 + 2?\\n\\nChoices:\\nA. 3\\nB. 2\\nC. 5\\nD. 8\\n\\nAnswer:\"", "input": "\"input\": \"What is 3 + 2?\\n\\nChoices:\\nA. 3\\nB. 2\\nC. 5\\nD. 8\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:002\",", "input": "\"id\": \"rebuild:002\","}
+{"id": "\"stem\": \"What is 3 + 3?\",", "input": "\"stem\": \"What is 3 + 3?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"3\",", "input": "\"3\","}
+{"id": "\"2\",", "input": "\"2\","}
+{"id": "\"4\",", "input": "\"4\","}
+{"id": "6", "input": "6"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 3 + 3?\\n\\nChoices:\\nA. 3\\nB. 2\\nC. 4\\nD. 6\\n\\nAnswer:\"", "input": "\"input\": \"What is 3 + 3?\\n\\nChoices:\\nA. 3\\nB. 2\\nC. 4\\nD. 6\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:003\",", "input": "\"id\": \"rebuild:003\","}
+{"id": "\"stem\": \"What is 5 + 2?\",", "input": "\"stem\": \"What is 5 + 2?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"10\",", "input": "\"10\","}
+{"id": "\"7\",", "input": "\"7\","}
+{"id": "\"12\",", "input": "\"12\","}
+{"id": "9", "input": "9"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 5 + 2?\\n\\nChoices:\\nA. 10\\nB. 7\\nC. 12\\nD. 9\\n\\nAnswer:\"", "input": "\"input\": \"What is 5 + 2?\\n\\nChoices:\\nA. 10\\nB. 7\\nC. 12\\nD. 9\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:004\",", "input": "\"id\": \"rebuild:004\","}
+{"id": "\"stem\": \"What is 8 + 5?\",", "input": "\"stem\": \"What is 8 + 5?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"15\",", "input": "\"15\","}
+{"id": "\"12\",", "input": "\"12\","}
+{"id": "\"17\",", "input": "\"17\","}
+{"id": "13", "input": "13"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 8 + 5?\\n\\nChoices:\\nA. 15\\nB. 12\\nC. 17\\nD. 13\\n\\nAnswer:\"", "input": "\"input\": \"What is 8 + 5?\\n\\nChoices:\\nA. 15\\nB. 12\\nC. 17\\nD. 13\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:005\",", "input": "\"id\": \"rebuild:005\","}
+{"id": "\"stem\": \"What is 2 + 4?\",", "input": "\"stem\": \"What is 2 + 4?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"5\",", "input": "\"5\","}
+{"id": "\"4\",", "input": "\"4\","}
+{"id": "\"3\",", "input": "\"3\","}
+{"id": "6", "input": "6"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 2 + 4?\\n\\nChoices:\\nA. 5\\nB. 4\\nC. 3\\nD. 6\\n\\nAnswer:\"", "input": "\"input\": \"What is 2 + 4?\\n\\nChoices:\\nA. 5\\nB. 4\\nC. 3\\nD. 6\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:006\",", "input": "\"id\": \"rebuild:006\","}
+{"id": "\"stem\": \"What is 8 + 3?\",", "input": "\"stem\": \"What is 8 + 3?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"15\",", "input": "\"15\","}
+{"id": "\"10\",", "input": "\"10\","}
+{"id": "\"11\",", "input": "\"11\","}
+{"id": "13", "input": "13"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 8 + 3?\\n\\nChoices:\\nA. 15\\nB. 10\\nC. 11\\nD. 13\\n\\nAnswer:\"", "input": "\"input\": \"What is 8 + 3?\\n\\nChoices:\\nA. 15\\nB. 10\\nC. 11\\nD. 13\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:007\",", "input": "\"id\": \"rebuild:007\","}
+{"id": "\"stem\": \"What is 6 + 2?\",", "input": "\"stem\": \"What is 6 + 2?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"10\",", "input": "\"10\","}
+{"id": "\"5\",", "input": "\"5\","}
+{"id": "\"9\",", "input": "\"9\","}
+{"id": "8", "input": "8"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 6 + 2?\\n\\nChoices:\\nA. 10\\nB. 5\\nC. 9\\nD. 8\\n\\nAnswer:\"", "input": "\"input\": \"What is 6 + 2?\\n\\nChoices:\\nA. 10\\nB. 5\\nC. 9\\nD. 8\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:008\",", "input": "\"id\": \"rebuild:008\","}
+{"id": "\"stem\": \"What is 3 + 6?\",", "input": "\"stem\": \"What is 3 + 6?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"11\",", "input": "\"11\","}
+{"id": "\"7\",", "input": "\"7\","}
+{"id": "\"9\",", "input": "\"9\","}
+{"id": "12", "input": "12"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 3 + 6?\\n\\nChoices:\\nA. 11\\nB. 7\\nC. 9\\nD. 12\\n\\nAnswer:\"", "input": "\"input\": \"What is 3 + 6?\\n\\nChoices:\\nA. 11\\nB. 7\\nC. 9\\nD. 12\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:009\",", "input": "\"id\": \"rebuild:009\","}
+{"id": "\"stem\": \"What is 3 + 2?\",", "input": "\"stem\": \"What is 3 + 2?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"9\",", "input": "\"9\","}
+{"id": "\"5\",", "input": "\"5\","}
+{"id": "\"4\",", "input": "\"4\","}
+{"id": "2", "input": "2"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 3 + 2?\\n\\nChoices:\\nA. 9\\nB. 5\\nC. 4\\nD. 2\\n\\nAnswer:\"", "input": "\"input\": \"What is 3 + 2?\\n\\nChoices:\\nA. 9\\nB. 5\\nC. 4\\nD. 2\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:010\",", "input": "\"id\": \"rebuild:010\","}
+{"id": "\"stem\": \"What is 5 + 3?\",", "input": "\"stem\": \"What is 5 + 3?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"7\",", "input": "\"7\","}
+{"id": "\"9\",", "input": "\"9\","}
+{"id": "\"11\",", "input": "\"11\","}
+{"id": "8", "input": "8"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 5 + 3?\\n\\nChoices:\\nA. 7\\nB. 9\\nC. 11\\nD. 8\\n\\nAnswer:\"", "input": "\"input\": \"What is 5 + 3?\\n\\nChoices:\\nA. 7\\nB. 9\\nC. 11\\nD. 8\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:011\",", "input": "\"id\": \"rebuild:011\","}
+{"id": "\"stem\": \"What is 7 + 4?\",", "input": "\"stem\": \"What is 7 + 4?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"10\",", "input": "\"10\","}
+{"id": "\"9\",", "input": "\"9\","}
+{"id": "\"11\",", "input": "\"11\","}
+{"id": "14", "input": "14"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 7 + 4?\\n\\nChoices:\\nA. 10\\nB. 9\\nC. 11\\nD. 14\\n\\nAnswer:\"", "input": "\"input\": \"What is 7 + 4?\\n\\nChoices:\\nA. 10\\nB. 9\\nC. 11\\nD. 14\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:012\",", "input": "\"id\": \"rebuild:012\","}
+{"id": "\"stem\": \"What is 6 + 3?\",", "input": "\"stem\": \"What is 6 + 3?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"11\",", "input": "\"11\","}
+{"id": "\"9\",", "input": "\"9\","}
+{"id": "\"12\",", "input": "\"12\","}
+{"id": "7", "input": "7"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 6 + 3?\\n\\nChoices:\\nA. 11\\nB. 9\\nC. 12\\nD. 7\\n\\nAnswer:\"", "input": "\"input\": \"What is 6 + 3?\\n\\nChoices:\\nA. 11\\nB. 9\\nC. 12\\nD. 7\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:013\",", "input": "\"id\": \"rebuild:013\","}
+{"id": "\"stem\": \"What is 4 + 9?\",", "input": "\"stem\": \"What is 4 + 9?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"12\",", "input": "\"12\","}
+{"id": "\"16\",", "input": "\"16\","}
+{"id": "\"18\",", "input": "\"18\","}
+{"id": "13", "input": "13"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 4 + 9?\\n\\nChoices:\\nA. 12\\nB. 16\\nC. 18\\nD. 13\\n\\nAnswer:\"", "input": "\"input\": \"What is 4 + 9?\\n\\nChoices:\\nA. 12\\nB. 16\\nC. 18\\nD. 13\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:014\",", "input": "\"id\": \"rebuild:014\","}
+{"id": "\"stem\": \"What is 5 + 7?\",", "input": "\"stem\": \"What is 5 + 7?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"12\",", "input": "\"12\","}
+{"id": "\"10\",", "input": "\"10\","}
+{"id": "\"16\",", "input": "\"16\","}
+{"id": "9", "input": "9"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 5 + 7?\\n\\nChoices:\\nA. 12\\nB. 10\\nC. 16\\nD. 9\\n\\nAnswer:\"", "input": "\"input\": \"What is 5 + 7?\\n\\nChoices:\\nA. 12\\nB. 10\\nC. 16\\nD. 9\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:015\",", "input": "\"id\": \"rebuild:015\","}
+{"id": "\"stem\": \"What is 7 + 8?\",", "input": "\"stem\": \"What is 7 + 8?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"12\",", "input": "\"12\","}
+{"id": "\"13\",", "input": "\"13\","}
+{"id": "\"15\",", "input": "\"15\","}
+{"id": "17", "input": "17"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 7 + 8?\\n\\nChoices:\\nA. 12\\nB. 13\\nC. 15\\nD. 17\\n\\nAnswer:\"", "input": "\"input\": \"What is 7 + 8?\\n\\nChoices:\\nA. 12\\nB. 13\\nC. 15\\nD. 17\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:016\",", "input": "\"id\": \"rebuild:016\","}
+{"id": "\"stem\": \"What is 7 + 5?\",", "input": "\"stem\": \"What is 7 + 5?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"13\",", "input": "\"13\","}
+{"id": "\"15\",", "input": "\"15\","}
+{"id": "\"11\",", "input": "\"11\","}
+{"id": "12", "input": "12"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 7 + 5?\\n\\nChoices:\\nA. 13\\nB. 15\\nC. 11\\nD. 12\\n\\nAnswer:\"", "input": "\"input\": \"What is 7 + 5?\\n\\nChoices:\\nA. 13\\nB. 15\\nC. 11\\nD. 12\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:017\",", "input": "\"id\": \"rebuild:017\","}
+{"id": "\"stem\": \"What is 6 + 8?\",", "input": "\"stem\": \"What is 6 + 8?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"13\",", "input": "\"13\","}
+{"id": "\"12\",", "input": "\"12\","}
+{"id": "\"15\",", "input": "\"15\","}
+{"id": "14", "input": "14"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 6 + 8?\\n\\nChoices:\\nA. 13\\nB. 12\\nC. 15\\nD. 14\\n\\nAnswer:\"", "input": "\"input\": \"What is 6 + 8?\\n\\nChoices:\\nA. 13\\nB. 12\\nC. 15\\nD. 14\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:018\",", "input": "\"id\": \"rebuild:018\","}
+{"id": "\"stem\": \"What is 3 + 2?\",", "input": "\"stem\": \"What is 3 + 2?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"5\",", "input": "\"5\","}
+{"id": "\"3\",", "input": "\"3\","}
+{"id": "\"8\",", "input": "\"8\","}
+{"id": "6", "input": "6"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 3 + 2?\\n\\nChoices:\\nA. 5\\nB. 3\\nC. 8\\nD. 6\\n\\nAnswer:\"", "input": "\"input\": \"What is 3 + 2?\\n\\nChoices:\\nA. 5\\nB. 3\\nC. 8\\nD. 6\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:019\",", "input": "\"id\": \"rebuild:019\","}
+{"id": "\"stem\": \"What is 3 + 8?\",", "input": "\"stem\": \"What is 3 + 8?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"13\",", "input": "\"13\","}
+{"id": "\"12\",", "input": "\"12\","}
+{"id": "\"14\",", "input": "\"14\","}
+{"id": "11", "input": "11"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 3 + 8?\\n\\nChoices:\\nA. 13\\nB. 12\\nC. 14\\nD. 11\\n\\nAnswer:\"", "input": "\"input\": \"What is 3 + 8?\\n\\nChoices:\\nA. 13\\nB. 12\\nC. 14\\nD. 11\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"rebuild:020\",", "input": "\"id\": \"rebuild:020\","}
+{"id": "\"stem\": \"What is 2 + 3?\",", "input": "\"stem\": \"What is 2 + 3?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"9\",", "input": "\"9\","}
+{"id": "\"8\",", "input": "\"8\","}
+{"id": "\"5\",", "input": "\"5\","}
+{"id": "4", "input": "4"}
+{"id": "],", "input": "],"}
+{"id": "\"input\": \"What is 2 + 3?\\n\\nChoices:\\nA. 9\\nB. 8\\nC. 5\\nD. 4\\n\\nAnswer:\"", "input": "\"input\": \"What is 2 + 3?\\n\\nChoices:\\nA. 9\\nB. 8\\nC. 5\\nD. 4\\n\\nAnswer:\""}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_no_00\",", "input": "\"id\": \"toy:q_no_00\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_no_01\",", "input": "\"id\": \"toy:q_no_01\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_no_02\",", "input": "\"id\": \"toy:q_no_02\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_no_03\",", "input": "\"id\": \"toy:q_no_03\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_no_04\",", "input": "\"id\": \"toy:q_no_04\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_no_05\",", "input": "\"id\": \"toy:q_no_05\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_no_06\",", "input": "\"id\": \"toy:q_no_06\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_no_07\",", "input": "\"id\": \"toy:q_no_07\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_no_08\",", "input": "\"id\": \"toy:q_no_08\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_no_09\",", "input": "\"id\": \"toy:q_no_09\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 9 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_yes_00\",", "input": "\"id\": \"toy:q_yes_00\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_yes_01\",", "input": "\"id\": \"toy:q_yes_01\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_yes_02\",", "input": "\"id\": \"toy:q_yes_02\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_yes_03\",", "input": "\"id\": \"toy:q_yes_03\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_yes_04\",", "input": "\"id\": \"toy:q_yes_04\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_yes_05\",", "input": "\"id\": \"toy:q_yes_05\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_yes_06\",", "input": "\"id\": \"toy:q_yes_06\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_yes_07\",", "input": "\"id\": \"toy:q_yes_07\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_yes_08\",", "input": "\"id\": \"toy:q_yes_08\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"toy:q_yes_09\",", "input": "\"id\": \"toy:q_yes_09\","}
+{"id": "\"input\": [", "input": "\"input\": ["}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"system\",", "input": "\"role\": \"system\","}
+{"id": "\"content\": \"You are a careful reasoner. Answer succinctly.\"", "input": "\"content\": \"You are a careful reasoner. Answer succinctly.\""}
+{"id": "},", "input": "},"}
+{"id": "{", "input": "{"}
+{"id": "\"role\": \"user\",", "input": "\"role\": \"user\","}
+{"id": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\"", "input": "\"content\": \"Is 2 an even number?\\n\\nChoices:\\nA. yes\\nB. no\\n\\nReturn only one letter from [AB] and nothing else.\""}
+{"id": "}", "input": "}"}
+{"id": "],", "input": "],"}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"yes\",", "input": "\"yes\","}
+{"id": "no", "input": "no"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"devops_001_dup\",", "input": "\"id\": \"devops_001_dup\","}
+{"id": "\"stem\": \"Which Git command lists untracked files only (respecting .gitignore)?\",", "input": "\"stem\": \"Which Git command lists untracked files only (respecting .gitignore)?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"git status -s\",", "input": "\"git status -s\","}
+{"id": "\"git diff --name-only\",", "input": "\"git diff --name-only\","}
+{"id": "\"git ls-files --others --exclude-standard\",", "input": "\"git ls-files --others --exclude-standard\","}
+{"id": "git ls-files --deleted", "input": "git ls-files --deleted"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"devops_002_dup\",", "input": "\"id\": \"devops_002_dup\","}
+{"id": "\"stem\": \"Which pipeline prints only running systemd service unit names, one per line?\",", "input": "\"stem\": \"Which pipeline prints only running systemd service unit names, one per line?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"systemctl list-units --type=service --state=running --no-legend --plain | awk '{printf \\\"%s\\\\n\\\", $1}'\",", "input": "\"systemctl list-units --type=service --state=running --no-legend --plain | awk '{printf \\\"%s\\\\n\\\", $1}'\","}
+{"id": "\"systemctl status --running --no-pager | awk '{print $1}'\",", "input": "\"systemctl status --running --no-pager | awk '{print $1}'\","}
+{"id": "\"systemctl list-unit-files --state=enabled --no-legend | awk '{print $1}'\",", "input": "\"systemctl list-unit-files --state=enabled --no-legend | awk '{print $1}'\","}
+{"id": "systemctl list-units --type=service --all --no-legend | awk '{print $1}'", "input": "systemctl list-units --type=service --all --no-legend | awk '{print $1}'"}
+{"id": "]", "input": "]"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"kn_001_dup\",", "input": "\"id\": \"kn_001_dup\","}
+{"id": "\"stem\": \"Which planet has the largest number of known moons?\",", "input": "\"stem\": \"Which planet has the largest number of known moons?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"Earth\",", "input": "\"Earth\","}
+{"id": "\"Jupiter\",", "input": "\"Jupiter\","}
+{"id": "\"Mars\",", "input": "\"Mars\","}
+{"id": "Venus", "input": "Venus"}
+{"id": "],", "input": "],"}
+{"id": "\"options\": {", "input": "\"options\": {"}
+{"id": "\"A\": \"Earth\",", "input": "\"A\": \"Earth\","}
+{"id": "\"B\": \"Jupiter\",", "input": "\"B\": \"Jupiter\","}
+{"id": "\"C\": \"Mars\",", "input": "\"C\": \"Mars\","}
+{"id": "\"D\": \"Venus\"", "input": "\"D\": \"Venus\""}
+{"id": "}", "input": "}"}
+{"id": "}", "input": "}"}
+{"id": "{", "input": "{"}
+{"id": "\"id\": \"kn_002_dup\",", "input": "\"id\": \"kn_002_dup\","}
+{"id": "\"stem\": \"Who wrote 'Pride and Prejudice'?\",", "input": "\"stem\": \"Who wrote 'Pride and Prejudice'?\","}
+{"id": "\"choices\": [", "input": "\"choices\": ["}
+{"id": "\"Emily Brontë\",", "input": "\"Emily Brontë\","}
+{"id": "\"Jane Austen\",", "input": "\"Jane Austen\","}
+{"id": "\"Mary Shelley\",", "input": "\"Mary Shelley\","}
+{"id": "Charles Dickens", "input": "Charles Dickens"}
+{"id": "],", "input": "],"}
+{"id": "\"options\": {", "input": "\"options\": {"}
+{"id": "\"A\": \"Emily Brontë\",", "input": "\"A\": \"Emily Brontë\","}
+{"id": "\"B\": \"Jane Austen\",", "input": "\"B\": \"Jane Austen\","}
+{"id": "\"C\": \"Mary Shelley\",", "input": "\"C\": \"Mary Shelley\","}
+{"id": "\"D\": \"Charles Dickens\"", "input": "\"D\": \"Charles Dickens\""}
+{"id": "}", "input": "}"}
+{"id": "}", "input": "}"}

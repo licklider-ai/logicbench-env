@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+# === 前提 ===
+# - data/dev_50.jsonl がある
+# - GOLD は自動検出（見つからなければエラー）
+# - .venv があれば有効化
+# - ~/.openai_api_key にAPIキー1行
+
+cd ~/dev/logicbench_env
+[ -f .venv/bin/activate ] && source .venv/bin/activate || true
+export OPENAI_API_KEY="$(tr -d '\r\n' < ~/.openai_api_key)"
+
+DATE="$(date +%Y%m%d_%H%M%S)"
+mkdir -p runs reports
+
+DATASET="data/dev_20.eval.jsonl"
+[ -s "$DATASET" ] || { echo "[ERR] $DATASET が見つからない/空です"; exit 1; }
+
+# GOLD 自動検出
+GOLD=""
+for C in data/gold_20.eval.jsonl data/gold_20.jsonl data/gold.jsonl data/gold_50.jsonl data/gold_50_real.jsonl; do
+  [ -s "$C" ] && { GOLD="$C"; break; }
+done
+[ -n "$GOLD" ] || { echo "[ERR] GOLD が見つかりません"; exit 1; }
+echo "[INFO] GOLD = $GOLD"
+
+# 回すモデル
+MODELS=( "gpt-4o-mini" "gpt-4.1-mini" "o3-mini" )
+
+# コスト（必要なら更新）
+declare -A PIN=()  # 入力/1K
+declare -A POUT=() # 出力/1K
+for m in "${MODELS[@]}"; do PIN[$m]=0; POUT[$m]=0; done
+# 例:
+# PIN["gpt-4o-mini"]=0.00015; POUT["gpt-4o-mini"]=0.00060
+
+SUMMARY_LIST=()
+FAILS=()
+
+for MODEL in "${MODELS[@]}"; do
+(
+  set -Eeuo pipefail
+  SAFE="${MODEL//[^A-Za-z0-9_.-]/_}"
+  PRED="runs/pred_${DATE}_${SAFE}.jsonl"
+  CSV="reports/summary_${DATE}_${SAFE}.csv"
+  MD="reports/report_${DATE}_${SAFE}.md"
+
+  echo "== [$MODEL] start =="
+
+  if [ ! -s "$PRED" ]; then
+    LB_MODEL="$MODEL" python3 scripts/eval_runner.py "$DATASET" "$PRED"
+  else
+    echo "[SKIP] exists: $PRED"
+  fi
+
+  NORM="${PRED%.jsonl}.norm.jsonl"
+python3 scripts/normalize_pred_labels.py --inp "$PRED" --out "$NORM"
+python3 scripts/score_and_cost_simple.py \
+    --pred "$NORM" --gold "$GOLD" --out "$CSV" \
+    --model_price_in "${PIN[$MODEL]}" --model_price_out "${POUT[$MODEL]}"
+
+  python3 scripts/make_report_simple.py "$CSV" "$MD"
+  echo "[OK] $MODEL done."
+  echo "$CSV" >> "/tmp/_summaries_${DATE}.lst"
+) || { echo "[ERR] $MODEL failed"; FAILS+=("$MODEL"); }
+done
+
+# 集約CSV
+ALLCSV="reports/summary_${DATE}_ALL.csv"
+: > "$ALLCSV"
+HEADER_DONE=0
+if [ -f "/tmp/_summaries_${DATE}.lst" ]; then
+  while IFS= read -r f; do
+    if [ -s "$f" ]; then
+      if [ $HEADER_DONE -eq 0 ]; then
+        cat "$f" >> "$ALLCSV"; HEADER_DONE=1
+      else
+        tail -n +2 "$f" >> "$ALLCSV"
+      fi
+    else
+      echo "[WARN] skip empty/missing: $f"
+    fi
+  done < "/tmp/_summaries_${DATE}.lst"
+fi
+
+# 総括MD
+ALLMD="reports/logicbench_batch_report_${DATE}.md"
+{
+  echo "# LogicBench 50問 バッチ結果 ($DATE)"
+  echo
+  echo "## 対象"
+  echo "- データ: \`$DATASET\`"
+  echo "- GOLD : \`$GOLD\`"
+  echo "- モデル: ${MODELS[*]}"
+  echo
+  echo "## 出力物"
+  echo "- 集約CSV: \`$ALLCSV\`"
+  echo "- 各モデル個別: \`reports/report_${DATE}_<model>.md\`"
+  [ ${#FAILS[@]} -gt 0 ] && echo -e "\n## 失敗モデル\n- ${FAILS[*]}"
+} > "$ALLMD"
+
+echo "✅ Done. ALLCSV=$ALLCSV  ALLMD=$ALLMD"

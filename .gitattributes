@@ -1,31 +1,6 @@
-# Text files -> normalize to LF
-*.py text eol=lf
-*.md text eol=lf
-*.json text eol=lf
-*.jsonl text eol=lf
+* text=auto eol=lf
+*.sh  text eol=lf
+*.py  text eol=lf
+*.jsonl  text eol=lf
 *.csv text eol=lf
-*.sh text eol=lf
-*.yml text eol=lf
-*.yaml text eol=lf
-*.txt text eol=lf
-
-# Binary (no EOL conversion)
-*.zip binary
-*.png binary
-*.jpg binary
-# すべてテキストは自動で正規化
-* text=auto
-
-# CSV/JSON/JSONL/MD は LF に固定
-*.csv  text eol=lf
-*.json text eol=lf
-*.jsonl text eol=lf
-*.md   text eol=lf
-# すべてテキストは自動で正規化
-* text=auto
-
-# CSV/JSON/JSONL/MD は LF に固定
-*.csv  text eol=lf
-*.json text eol=lf
-*.jsonl text eol=lf
-*.md   text eol=lf
+*.md  text eol=lf
